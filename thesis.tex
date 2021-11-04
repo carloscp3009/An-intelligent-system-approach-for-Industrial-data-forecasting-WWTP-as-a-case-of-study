@@ -1,0 +1,140 @@
+% (unofficial) La Trobe PhD Thesis Template
+% Copyright (C) 2018 Matthias Langer
+%
+% This program is free software; you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation; either version 2 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License along
+% with this program; if not, write to the Free Software Foundation, Inc.,
+% 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+%
+\RequirePackage[english=usenglishmax]{hyphsubst}
+\documentclass[twoside,openright,titlepage,numbers=noenddot,headinclude,footinclude=true,cleardoublepage=empty,listof=totoc,paper=a4,fontsize=11pt,australian,twoside=semi,DIV=calc]{scrreprt} 
+
+% -----------------------------------------------------------------------------
+%   CONFIGURATION
+% -----------------------------------------------------------------------------
+% Thesis and submission:
+\newcommand{\myTitle}{An intelligent system approach for Industrial data forecasting: WWTP as a case of study}
+\newcommand{\mySubmissionYear}{2021}
+\newcommand{\mySubmissionMonth}{November}
+\newcommand{\mySubmissionDay}{30}
+
+% Regarding yourself:
+\newcommand{\myFirstName}{Carlos Andres}
+\newcommand{\myLastName}{Cárdenas Pérez}
+\newcommand{\myWebsite}{}
+\newcommand{\myBirthYear}{1997}
+\newcommand{\myBirthMonth}{September}
+\newcommand{\myBirthDay}{30}
+\newcommand{\myBirthPlace}{Colombia}
+
+% Primary supervisor:
+\newcommand{\myProfTitle}{Ph.D.}
+\newcommand{\myProfFirstName}{Christian G.}
+\newcommand{\myProfLastName}{Quintero M. }
+\newcommand{\myProfWebsite}{}
+
+% Co-supervisor:
+\newcommand{\myOtherProfTitle}{}
+\newcommand{\myOtherProfFirstName}{}
+\newcommand{\myOtherProfLastName}{}
+\newcommand{\myOtherProfWebsite}{}
+
+% University related:
+\newcommand{\myDepartment}{Department of Electrical and Electronic Engineering}
+\newcommand{\myFaculty}{}
+\newcommand{\mySchool}{}
+\newcommand{\myUni}{Universidad del Norte}
+% -----------------------------------------------------------------------------
+
+\input{classicthesis-config}
+\usepackage[a4paper,top=25.4mm,bottom=25.4mm,left=25mm, right=25mm,bindingoffset=6mm]{geometry} %This package resizes the margins to meet La Trobe's guidelines
+
+
+\addbibresource{library.bib}
+\addbibresource{MyCollection.bib}
+
+\begin{document}
+  \frenchspacing
+  \raggedbottom
+  \selectlanguage{australian}
+  
+  \pagestyle{plain}
+  \pagenumbering{roman}
+  
+  
+  \singlespacing
+  \input{text/ch0-title}
+  \input{text/ch0-backside}
+  
+  \onehalfspacing
+  \input{text/ch0-contents}
+  
+  \chapter*{Abstract}
+  \addcontentsline{toc}{chapter}{Abstract}
+  \input{text/ch0-abstract}
+  
+  \chapter*{Statement of Authorship}
+  \addcontentsline{toc}{chapter}{Declaration of Authorship}
+  \input{text/ch0-declaration}
+  
+  \input{text/ch0-acknowledgements}
+  \input{text/ch0-publications}
+  %\input{text/ch0-dedication}
+  \input{text/ch0-abbreviations}
+  
+  \cleardoublepage
+  \pagestyle{scrheadings}
+  \pagenumbering{arabic}
+  \onehalfspacing
+  
+  \chapter{Introduction}\label{c:Introduction}
+  \input{text/ch1}
+  
+  \chapter{Literature Review}\label{c:Background}
+  \input{text/ch2}
+  
+  \chapter{Related Works}\label{c:Related-Works}
+  \input{text/ch3}
+  
+  \chapter{Major Contribution 1}\label{c:Contribution-1}
+  \input{text/ch4}
+  
+  \chapter{Major Contribution 2}\label{c:Contribution-2}
+  \input{text/ch5}
+
+  \chapter{Experiments}\label{c:Experiments}
+  \input{text/ch6}
+  
+  \chapter{Conclusions}\label{c:Conclusions}
+  \input{text/ch7}
+  
+  \cleardoublepage
+
+  \input{text/app-main} %Add appendices title to toc
+  \appendix
+ \chapter{Appendix 1}\label{app:A}
+  \acresetall 
+  \input{text/app-a}
+  \acresetall 
+  \chapter{Appendix 2}\label{app:B}
+  \input{text/app-b}
+
+  
+  \singlespacing
+  \input{text/app-bibliography}
+  \cleardoublepage
+  
+  \pagestyle{empty}
+  \onehalfspacing
+  \input{text/app-colophon}
+
+\end{document}
