@@ -5,30 +5,53 @@ This chapter introduces and reviews general concepts of the wastewater treatment
 
 Provide background information that will help potential readers to understand your research. It is up to you to decide the volume and content of this chapter.
 
-At the time you start writing your thesis you have probably already published novel works and become an expert in your field of research. You may find it difficulty to assume the perspective of a less experienced reader.
 
-Your potential audience is predominately academic and works on tangentially related things. Thus, you may assume that a typical reader has successfully completed all compulsory undergraduate-degree subjects for a related degree. For example, if you do a PhD in computer science or a related discipline, you may assume that the reader knows what the difference between the declarative and imperative programming paradigm is, or what the difference between a linked-list and a tree is.
 
 \section{Machine Learning}
 \label{s:Second-Background-Topic}
 
-Machine Learning is an area of the Artificial Intelligence where a computer is programmed to learn form data [A quick Review]. In 1959 Arthur Samuel defined the Machine Learning as \textbf{the field of study that gives the computers the ability to learn without being explicitly programmed}. Almost 40 years later, Tom Mitchell described Machine Learning as follows: \textbf{A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.}
+\ac{ML} is an area of the \ac{AI} where a computer is programmed to learn form data \cite{Ray2019}. In 1959 Arthur Samuel defined the Machine Learning as \textbf{the field of study that gives the computers the ability to learn without being explicitly programmed}. Almost 40 years later, Tom Mitchell described Machine Learning as follows: \textbf{A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.} \autoref{f:AI} \cite{raza_cinquergrana_2018} shows the how the \ac{ML} fits in the \ac{AI} world and presents \ac{DL} as part of \ac{ML} which is presented in \autoref{s:Second-Background-Deep-Learning}.
 
-%\cite{raza_cinquergrana_2018}
+\begin{figure}[h]
+\centering
+\includegraphics[width=8cm]{figures/Ch2/AI-ML-DL.png}
+\caption{AI, ML, and DL \cite{raza_cinquergrana_2018}}
+\label{f:AI}
+\end{figure}
+
+Now a days machine Learning is used in a variety of fields such as: robotics, biology, social science, virtual personal assistants, computer games, autonomous driving, pattern recognition, natural language processing, computer vision, product recommendation, market prediction, medical diagnosis, fraud detection, agriculture advisory, Bots, climatology, social media services, among others \cite{Srivastava_2019, Shinde_2018, Ray2019}, \autoref{f:Ml-app} shows some of the \ac{ML} application domains. An important milestone was the transition from rule based programming to the learning based on data. \autoref{f:Traditional-approach} shows how the rule based approach works, where it is needed to start by studying the problem, identify some patterns and build a set of rules based on them. Later, the system is evaluated and the rules are adjusted until the performance is good enough \cite{geron2017}.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=8cm]{figures/AI-ML-DL.png}
-\caption{AI, ML, DL}
-\label{f:AI}
+\includegraphics[width=8cm]{figures/Ch2/ML-Applications.png}
+\caption{ML Applications\cite{Shinde_2018}}
+\label{f:Ml-app}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch2/Tradicional-Approach.png}
+\caption{Traditional rule based approach \cite{geron2017}}
+\label{f:Traditional-approach}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch2/Ml-Approach.png}
+\caption{ML approach \cite{geron2017}}
+\label{f:ML-approach}
+\end{figure}
+
+\subsection{Linear Regression}
+\subsection{Decision Tree}
+\subsection{Support Vector Machines}
 
 \section{Deep Learning}
 \label{s:Second-Background-Deep-Learning}
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
-\includegraphics[width=8cm]{figures/MlvsDL-data-amount.png}
+\includegraphics[width=8cm]{figures/Ch2/MlvsDL-data-amount.png}
 \caption{ML vs DL}
 \label{f:ML-vs-DL}
 \end{figure}
@@ -41,5 +64,5 @@ Machine Learning is an area of the Artificial Intelligence where a computer is p
 \section{Summary}
 \label{s:Background-Summary}
 
-The final section of each chapter should summarize the chapter. In comparison to the chapter, the summary should be short ($\frac{1}{2}$ to $2$ pages is normal).
+The final section of each chapter should summarize the chapter. In comparison to the chapter.
 
