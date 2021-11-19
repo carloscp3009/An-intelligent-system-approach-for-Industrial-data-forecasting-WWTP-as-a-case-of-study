@@ -1,8 +1,6 @@
-COD is one of the most important variables in the process of a biological treatment since experts can make decisions based on the measurements of this variable. The objective of biological wastewater treatment is to perform a system to remove the pollutants present in water. Thus, this treatment is used overall because it is compelling and more efficient than numerous mechanical or compound procedures. In the bioreactor at this stage, a variety of microorganisms are used to break down organic matter in the water. However, the microorganisms are susceptible to change, depending on all the conditions in the tank.
+\ac{COD} is one of the most important variables in the process of a biological treatment since experts can make decisions based on the measurements of this variable. The objective of biological wastewater treatment is to perform a removal of the pollutants present in water. Thus, this treatment is used overall because it is compelling and more efficient than numerous mechanical or compound procedures. In the bioreactor at this stage, a variety of microorganisms are used to break down organic matter in the water. However, the microorganisms are susceptible to change, depending on several the bioreactor conditions. Likewise, it results relevant monitoring the concentration of biomass available in the bioreactor which indicates the state of the microorganisms population.
 
-This study proposes to predict one-day time-window CODD, CODEQ, and Mixed Liquor Volatile Solid Suspended MLVSS, essential parameters in decision-making, knowing how contaminated the water will be at the effluent stream (discharge point), how contaminated will be the tank, and how it is going to behave the microorganism population in charge of the biological stage. 
-
-\autoref{f:Biological-treatment} illustrates the composition of the biological treatment stage on which this work focuses its attention on. The stage has three main components and each one plays an important role in the organic load removal, an equalization pit, a bioreactor, and a clarifier. Green circles represent measured variables of interest and potential input variables for the system. Orange circles are the target variables of this work, which are also available.
+This study proposes to predict one-day time-window \ac{COD}\textsubscript{D}, \ac{COD}\textsubscript{EQ}, and \ac{MLVSS}, essential parameters in decision-making, knowing how contaminated the water will be at the effluent stream (discharge point), the organic matter concentration at the input of the bioreactor, and how the microorganism population in charge of the biological stage is going to behave. 
 
 \begin{figure}[h]
 \centering
@@ -11,7 +9,11 @@ This study proposes to predict one-day time-window CODD, CODEQ, and Mixed Liquor
 \label{f:Biological-treatment}
 \end{figure}
 
-This work uses python programming language to implement the prediction system, supported by several libraries such as Numpy, Pandas, Tensor Flow, Sci-kit Learn, Matplotlib, among others. A GitHub repository contains the files corresponding to code, models, and some results \footnote{\url{https://github.com/carloscp3009/Machine-Learning-Approaches-for-Industrial-data-forecasting}}. The study utilizes 343 data samples from a wastewater treatment facility located in Nantong, China. Measurements correspond to most of the year 2018 and present a daily frequency, which experts consider accurate to capture the process dynamics. The measured variables of the process available for this work are:
+\autoref{f:Biological-treatment} illustrates the composition of the biological treatment stage which is the case of study in this research. The stage has three main components and each one plays an important role in the organic load removal, an equalization pit, a bioreactor, and a clarifier. Green circles represent measured variables of interest and potential input variables for the system. Orange circles are the target variables of this work, which are also available.
+
+This work uses python programming language to implement the intelligent system, supported by several libraries such as Numpy, Pandas, Tensor Flow, Sci-kit Learn, Matplotlib, among others. A GitHub repository contains the files corresponding to code, models, and some of the results presented in this document \footnote{\url{https://github.com/carloscp3009/Machine-Learning-Approaches-for-Industrial-data-forecasting}}. 
+
+The study utilizes 343 data samples from a wastewater treatment facility located in Nantong, China. Measurements correspond to most of the year 2018 and present a daily frequency, which experts consider accurate to capture the process dynamics. The measured variables of the process available for this work are:
 
 \begin{itemize}
  \item	Flow
@@ -25,7 +27,7 @@ This work uses python programming language to implement the prediction system, s
  \item	Food to microorganism (F/M)
 \end{itemize}
 
-The following nomenclature determines the stage of the process where the variable is measured.
+The following nomenclature determines the unit process or component within the biological stage that the variable is measured.
 
 \begin{itemize}
  \item	EQ = Equalizer
@@ -37,14 +39,26 @@ The following nomenclature determines the stage of the process where the variabl
  \item	D = Discharge Pit
 \end{itemize}
 
-The exogenous variables used as inputs of the system are selected using the Pearson correlation. This enhances the model learning capability by reducing the noise of not correlated variables and decreasing the number of trainable parameters which implies a model complexity reduction. Table 1 presents the Person correlation of the three target variables this study cover. 
+\input{tables/correlation_table}
+\autoref{t:correlation_table} presents the Person correlation of the three target variables this study cover. The correlation coefficient allows to select the exogenous variables used as inputs for the system. This enhances the model learning capability by reducing the noise of not correlated variables and decreasing the number of trainable parameters which implies a model complexity reduction. 
 
-After variable selection, the dataset is split into training, validation and test sets. However, in this case, the data was split into training and test sets since the number of samples was small in comparison with the amount of data used to train an ANN. It is important to note that a computational technique must be selected. As mentioned before in related works in Table 3, about 64.71\% of the work of authors used an algorithm from the ANN group to develop forecast models. It has been verified that neural networks have suitable results in the area since the water treatment process is characterized by being nonlinear in behavior, so if they are used properly, they can represent the dynamics of this process very well. Once the model was selected, the model was trained and brought into operating condition to estimate COD. An error measure is necessary to support the performance of the model. Therefore, the MAPE), defined as shown in Equation (1), was chosen to quantify the ANN error. In this equation, x\textsubscript{i} represents the actual point, which is intended to be predicted, x\textsubscript{i} represents the predicted values of that observed point and N is the number of observed values that are intended to be predicted.
+After variable selection, the dataset is split into training (0.8), validation (0.1) and test (0.1) sets. The first 80\% of the dataset serves as examples for the model to learn, the following 10\% allows to validate the model performance for early stopping, and hyper-parameters tuning, and the last 10\% is used to evaluate the performance of the model using new data, this way obtaining a certainty of its behaviour in production mode. 
+
+It is important to note that a computational technique must be selected. As mentioned before in related works in \autoref{t:state-of-art}, about 64.71\% of the work of authors used an algorithm from the ANN group to develop forecast models. It has been verified that neural networks have suitable results in the area since the water treatment process is characterized by being nonlinear, so if they are used properly, they can represent the dynamics of this process very well. 
+
+Once a technique is selected, the training of the model begins. An error measure is necessary to support the performance of the model. Therefore, defined as shown in \autoref{eq:MAPE} is used as the evaluation metric.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/training-FlowChart.png}
+\caption{Traininf flow chart}
+\label{f:training-flowchart}
+\end{figure}
 
 \section{Approach 1}
 \label{s:Approach1}
 
-Figure 5 shows in more detail how the model is conceived and how the COD forecasting is achieved. First, the objective variable taken from the dataset is studied using a time-series decomposition technique that transforms the variable into three additive components: trend, seasonality and residual. Leveraging an auto correlation study over the components, the first two are estimated using their past values. On the other hand, the residual component is estimated using an ANN, which received exogenous variables selected from a correlation study and a past value of the same component. Finally, the addition of the three components provides the COD prediction. 
+\autoref{f:Approach 1} shows in more detail how the model is conceived and how the COD forecasting is achieved. First, the objective variable taken from the dataset is studied using a time-series decomposition technique that transforms the variable into three additive components: trend, seasonality and residual. Leveraging an auto correlation study over the components, the first two are estimated using their past values. On the other hand, the residual component is estimated using an ANN, which received exogenous variables selected from a correlation study and a past value of the same component. Finally, the addition of the three components provides the COD prediction. 
 
 \begin{figure}[h]
 \centering
@@ -54,11 +68,47 @@ Figure 5 shows in more detail how the model is conceived and how the COD forecas
 \end{figure}
 
 \subsection{Time Series Decomposition}
+For the time-series analysis of the target, the variable was made a component decomposition where the time series could be represented as a combination of trend, seasonality and residual components [35]. From this point, it was intended to forecast each component of the time series to obtain the objective series using the additive model stated by Pearson and presented in Equation (2) [36], where Tt refers to tendency or trend, St to seasonal movements, Rt to residuals or irregulars and Xt to the series observed.
+
+Figure 7 shows an example of how the equalizer’s COD decomposition looks for the year 2019, where (a) shows the original COD variable, (b) the trend component, (c) the seasonal component and (d) the residual component.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/time_series_descompose.png}
+\caption{Time Series Decomposition}
+\label{f:Time-series-decomposition}
+\end{figure}
+
 \subsection{Autocorrelation Study}
+Analyzing the time-series decomposition, both autocorrelation and partial autocorrelation studies were made on residual, seasonal and trend COD to extract the important characteristics. From this analysis, it was possible to conduct an autoregressive estimation of the trend and seasonal component of the series. Figures 8, 9, and 10 show the total and partial autocorrelation, respectively. 
 \subsection{Model Design}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/CODd-1.png}
+\caption{Approach 1 - CODD}
+\label{f:App1-codd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/CODeq-1.png}
+\caption{Approach 1 - CODEQ}
+\label{f:App1-codeq}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/MLVSS-1.png}
+\caption{Approach 1 - MLVSS}
+\label{f:App1-MLVSS}
+\end{figure}
 
 \section{Approach 2}
 \label{s:Approach2}
+
+The second approach uses a recurrent neural network, specifically a Long Short-Term Memory (LSTM), a powerful network architecture for sequential data which considers the effect of past values of both endogenous and exogenous variables by itself and learns possible time patterns during the training. Fig. 5 shows a general overview of the second approach. This network requires some data pre-processing to structure the data in sequences format (seven past steps are considered for this study), but nothing more than standardization is applied. 
 
 \begin{figure}[h]
 \centering
@@ -67,8 +117,31 @@ Figure 5 shows in more detail how the model is conceived and how the COD forecas
 \label{f:Approach 2}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/CODd-2.png}
+\caption{Approach 2 - CODD}
+\label{f:App2-codd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/CODeq-2.png}
+\caption{Approach 2 - CODEQ}
+\label{f:App2-codeq}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach2.png}
+\caption{Approach 2 - MLVSS}
+\label{f:App2-MLVSS}
+\end{figure}
+
 \section{Approach 3}
 \label{s:Approach3}
+
+The third approach proposed uses a machine learning technique based on Support Vector Machines. The Support Vector Regression (SVR) algorithm offers an accurate prediction of the time series. This model receives as inputs the exogenous variables selected from the correlation analysis. The implemented model uses Radial Base Function (RBF) kernel, gamma of 0.001, epsilon equal to 0.2 and c value of 10.
 
 \begin{figure}[h]
 \centering
@@ -77,6 +150,26 @@ Figure 5 shows in more detail how the model is conceived and how the COD forecas
 \label{f:Approach 3}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/CODd-3.png}
+\caption{Approach 3 - CODD}
+\label{f:App3-codd}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/CODeq-3.png}
+\caption{Approach 3 - CODEQ}
+\label{f:App3-codeq}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach3.png}
+\caption{Approach 3 - MLVSS}
+\label{f:App3-MLVSS}
+\end{figure}
 
 
 \section{Summary}

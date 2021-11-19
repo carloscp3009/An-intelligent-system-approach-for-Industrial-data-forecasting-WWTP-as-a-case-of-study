@@ -1,4 +1,4 @@
-\hinttext{This chapter provides an introduction to the work presented in this thesis. Specifically, the motivation in the research area, the pursued aims and the main contributions are briefly described. Finally, the chapter concludes with an overview of the structure and contents of the thesis.}
+This chapter provides an introduction to the work presented in this thesis. Specifically, the motivation in the research area, the pursued aims and the main contributions are briefly described. Finally, the chapter concludes presenting the thesis outline.
 
 \section{Motivation}
 \label{s:Motivation}
@@ -7,7 +7,14 @@ Over the last decade, the amount and complexity of data have increased significa
 
 The analysis of the process of a WWTP can be classified as a complex control problem, which behaves as a nonlinear dynamic process \cite{Pang2019}. Taking into account the nature of the process, the implementation of real-time optimal control is a challenge. Thus, predicting the effluent quality of this operation would help to control some parameters to prevent disasters and make the challenge less complex. Understanding the WWTP’s complex nature depends on microbial, chemical and physical features, which are important to improve the effectiveness of the process \cite{Li2013}. These factors vary with time and physical attributes, such as weather, season, influent water, pH and bacteria amount, among others. However, using the problem background, statistical analysis and computational techniques reduces the complexity that a human being must understand in the WWTP process. The concept of “machine learning” has revolutionized analytics techniques to solve elaborate problems; as a result, experts in this area have taken advantage of the progress in these techniques to implement algorithms that describe the WWTP process to make the analysis more intelligible.
 
-The environmental pollutions are becoming the main concerns of the society, and the more stringent requirements and regulations for wastewater, air pollutants and solid waste treatment have stimulated the need for further improvement in this domain (Kannangara et al., 2018; Li and Zhu, 2018). However, most of the environmental pollution controls are associated with a number of factors with nonlinear, time-varying, multi-source and multi-objective characteristics, resulting in difficulties to achieve optimizing influential factors and desired system performance \cite{Ye2020}.
+The environmental pollution is becoming the main concern of the society, and the more stringent requirements and regulations for wastewater, air pollutants and solid waste treatment have stimulated the need for further improvement in this domain (Kannangara et al., 2018; Li and Zhu, 2018). However, most of the environmental pollution controls are associated with a number of factors with nonlinear, time-varying, multi-source and multi-objective characteristics, resulting in difficulties to achieve optimizing influential factors and desired system performance \cite{Ye2020}. \autoref{f:gartner-ai2021} shows the expectations and productivity of artificial intelligence in 2021 \footnote{\url{https://www.gartner.com/en/articles/the-4-trends-that-prevail-on-the-gartner-hype-cycle-for-ai-2021}}. It can be appreciated that Intelligent Applications, Machine Learning and Deep learning have not gotten to the plateau of productivity yet, actually they are getting out of the peak of inflated expectations which means that this technologies are being used in a lot of applications, researchers are exploring where they fit the best and their potential is still in discovering. 
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch1/gartner-ai2021.png}
+\caption{Hype Cycle for Artificial Intelligence 2021}
+\label{f:gartner-ai2021}
+\end{figure}
 
 \section{Objectives}
 \label{s:Objectives}
@@ -28,6 +35,7 @@ The research conducted in this dissertation aims to implement and experiment wit
 \label{s:Question}
 The principal question addressed in this dissertation is:
 
+¿How accurate can be predicted water quality parameters of an industrial wastewater treatment plant an intelligent system?
 
 \section{Contributions}
 \label{s:Contributions}
@@ -36,11 +44,9 @@ Our key contributions include:
 
 \begin{enumerate}
 
-  \item Machine Learning algorithms tested in industrial scenario. Specially when a new environmental
+  \item Machine Learning algorithms tested in industrial scenario. Specially when a ground-breaking (novel) wastewater treatment is implemented. 
   
-  \item \hinttext{Be brief!}
-  
-  \item \hinttext{The number of contributions does not have to match the number of contribution chapters.}
+  \item Evaluation of different ensemble methods to improve single predictive models for industrial field.
 
 \end{enumerate}
 
