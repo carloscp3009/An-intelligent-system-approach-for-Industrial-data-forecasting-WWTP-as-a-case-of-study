@@ -192,41 +192,72 @@ The are several kernels available but the most common ones present in the state-
 \label{f:ML-vs-DL}
 \end{figure}
 
-Lots of today's inventions are inspired in nature and environment phenomena. Well, the brain architecture has served as inspiration to \ac{ANN} which are the core of the \ac{DL}. An \ac{ANN} model is composed by a set of layers which contains a processing unit called perceptron that emulates a human neuron. Neurons of each layer interconnect with others building a more complex structure with higher learning capabilities just as human brain neuronal connections. This artificial and mathematical connections between perceptrons are called weights. During the training process these weights are updated
+Lots of today's inventions are inspired in nature and environment phenomena. Well, the brain architecture has served as inspiration to \ac{ANN} which are the core of the \ac{DL}. An \ac{ANN} model is composed by a set of layers which contains a processing unit called perceptron that emulates a human neuron, \autoref{f:Perceptron} shows the perceptron unit and its analogy with a biological neuron. Neurons of each layer interconnect with others building a more complex structure with higher learning capabilities just as human brain neuronal connections. This artificial and mathematical connections between perceptrons are called weights. During the training process these weights update their values in order to minimize a loss function which measures the distance between the model output and the expected output, these updates are called learning \cite{Chollet2018}. 
 
-
-\autoref{f:ML-vs-DL-data-amount} shows the scalability and the potential performance based on the amount of data available to train the model.
 \begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch2/Perceptron.pdf}
+\caption{Perceptron simple \cite{Pitalua2009}}
+\label{f:Perceptron}
+\end{figure}
+ 
+An important feature of \ac{DL} is the potential to achieve high performance in complex problems with high amount of data. \autoref{f:ML-vs-DL-data-amount} shows the scalability and the potential performance based on the amount of data available to train the model.
+
+\begin{figure}[h!]
 \centering
 \includegraphics[width=12cm]{figures/Ch2/MlvsDL-data-amount.png}
 \caption{ML vs DL performance based on data amount}
 \label{f:ML-vs-DL-data-amount}
-\end{figure}
+\end{figure} 
 
 \subsubsection{Feed-forward Neural Network}
-\subsubsection{Long Short term Memory Neural Network}
-In recent years, RNN has shown an outstanding performance in terms of sequential characteristics modelling. As a modified version of RNN, \ac{LSTM} model is specially designed to solve the long-term dependence problem confronted by general RNN methods. LSTM is uniquely added a memory storage module that is protected by some gating neurons who are distinguished from ordinary neurons by setting two states: on and off. Therefore, LSTM is formulated in this research to model sequential characteristics of WTP. Detailed \ac{LSTM} cell model is shown in \autoref{f:LSTM-cell}.
+Building a network made of perceptron results in an \ac{ANN} known as \ac{MLP}. A \ac{MLP} receives the data in an input layer, then it is followed by one or more hidden layers and ends up with an output layer.
+\autoref{f:FFNN} shows an example of a \ac{MLP} \footnote{\url{https://www.mql5.com/es/code/9002}}, it is called \ac{FFNN} since the data information flows in only one direction \cite{geron2017}. 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=12cm]{figures/Ch2/LSTM_cell.png}
-\caption{LSTM cell}
+\includegraphics[width=12cm]{figures/Ch2/FFNN.png}
+\caption{Feed Forward Neural Network}
+\label{f:FFNN}
+\end{figure}
+
+\subsubsection{Long Short term Memory Neural Network}
+In recent years, \ac{RNN} has demonstrated a high performance dealing with sequential data. This has led to a success implementation of these networks in \ac{NLP} field.
+Now a days, \ac{RNN}s mainly refers to \ac{GRU} and \ac{LSTM} networks which are modified versions of \ac{RNN} \cite{Guo2020}. \ac{LSTM} are specialized in long short-term problems building on its three gates (Input gate, Forget gate and Output gate). Therefore, LSTM is formulated in this research to model sequential characteristics of the \ac{WWT}. Detailed \ac{LSTM} cell model is shown in \autoref{f:LSTM-cell}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{figures/Ch2/LSTM_cell.png}
+\caption{LSTM cell \cite{Guo2020}}
 \label{f:LSTM-cell}
 \end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch2/LSTM_nn.png}
+\caption{LSTM Neural Network \cite{zapata2019}}
+\label{f:LSTM-nn}
+\end{figure}
+
+
+
 %\subsubsection{Adaptive Neuro-Fuzzy Inference Systems}
-
-
-
-
 \section{Evaluation Metrics}
 \label{sec:section_Example}
 
 \subsection{Mean Absolute Percentage Error}
+The \ac{MAPE} is a metric 
+\autoref{eq:MAPE} presents the formula to compute the value of \ac{MAPE}.
 
-\begin{equation}
-    MAPE = 
+\begin{equation}\label{eq:MAPE}
+    MAPE = \frac{1}{n} \sum_{i=1}^{n} \bigg| \frac{x_i - \hat{x}_i}{x_i} \bigg| x 100
 \end{equation}
+
+\begin{itemize}
+    \item \begin{math}\hat{x}_i\end{math} is the predicted value.
+    \item \begin{math}n\end{math} is the number of samples.
+    \item \begin{math}x_i\end{math} is the expected value.
+\end{itemize}
 
 %\subsection{Determination Coefficient}
 

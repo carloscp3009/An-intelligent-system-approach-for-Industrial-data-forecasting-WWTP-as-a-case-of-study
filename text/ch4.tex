@@ -39,26 +39,29 @@ The following nomenclature determines the unit process or component within the b
  \item	D = Discharge Pit
 \end{itemize}
 
-\input{tables/correlation_table}
-\autoref{t:correlation_table} presents the Person correlation of the three target variables this study cover. The correlation coefficient allows to select the exogenous variables used as inputs for the system. This enhances the model learning capability by reducing the noise of not correlated variables and decreasing the number of trainable parameters which implies a model complexity reduction. 
+\section{Predictive model Approaches}
+\label{s:model-design}
 
-After variable selection, the dataset is split into training (0.8), validation (0.1) and test (0.1) sets. The first 80\% of the dataset serves as examples for the model to learn, the following 10\% allows to validate the model performance for early stopping, and hyper-parameters tuning, and the last 10\% is used to evaluate the performance of the model using new data, this way obtaining a certainty of its behaviour in production mode. 
+ The correlation coefficient allows to select the exogenous variables used as inputs for the system. This enhances the model learning capability by reducing the noise of not correlated variables and decreasing the number of trainable parameters which implies a model complexity reduction. 
+
+After variable selection, the dataset is split into training (0.8) and testing (0.2) sets. The first 80\% of the dataset serves as examples for the model to learn, the following 10\% allows to validate the model performance for early stopping, and hyper-parameters tuning, and the last 10\% is used to evaluate the performance of the model using new data, this way obtaining a certainty of its behaviour in production mode. 
 
 It is important to note that a computational technique must be selected. As mentioned before in related works in \autoref{t:state-of-art}, about 64.71\% of the work of authors used an algorithm from the ANN group to develop forecast models. It has been verified that neural networks have suitable results in the area since the water treatment process is characterized by being nonlinear, so if they are used properly, they can represent the dynamics of this process very well. 
-
-Once a technique is selected, the training of the model begins. An error measure is necessary to support the performance of the model. Therefore, defined as shown in \autoref{eq:MAPE} is used as the evaluation metric.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch4/training-FlowChart.png}
-\caption{Traininf flow chart}
+\caption{Training flow chart}
 \label{f:training-flowchart}
 \end{figure}
 
-\section{Approach 1}
+Once a technique is selected, the training of the model begins. An error measurement is necessary to support the performance of the model. Therefore, the \ac{MAPE} is used as the evaluation metric for this study defined as shown in \autoref{eq:MAPE}.
+
+
+\subsection{Approach 1}
 \label{s:Approach1}
 
-\autoref{f:Approach 1} shows in more detail how the model is conceived and how the COD forecasting is achieved. First, the objective variable taken from the dataset is studied using a time-series decomposition technique that transforms the variable into three additive components: trend, seasonality and residual. Leveraging an auto correlation study over the components, the first two are estimated using their past values. On the other hand, the residual component is estimated using an ANN, which received exogenous variables selected from a correlation study and a past value of the same component. Finally, the addition of the three components provides the COD prediction. 
+First, the target variable taken from the dataset is studied using a time-series decomposition technique that transforms and decompose the variable into three additive components: trend, seasonality and residual. Leveraging an auto correlation study over the components, the first two are estimated using their past values. On the other hand, the residual component is estimated using an \ac{FFNN}, which received exogenous variables selected from a correlation study and a past value of the same component. Finally, the addition of the three components provides the \ac{COD} prediction. \autoref{f:Approach 1} shows in more detail how the model is conceived and how forecasting is achieved.
 
 \begin{figure}[h]
 \centering
@@ -67,10 +70,23 @@ Once a technique is selected, the training of the model begins. An error measure
 \label{f:Approach 1}
 \end{figure}
 
-\subsection{Time Series Decomposition}
-For the time-series analysis of the target, the variable was made a component decomposition where the time series could be represented as a combination of trend, seasonality and residual components [35]. From this point, it was intended to forecast each component of the time series to obtain the objective series using the additive model stated by Pearson and presented in Equation (2) [36], where Tt refers to tendency or trend, St to seasonal movements, Rt to residuals or irregulars and Xt to the series observed.
+\subsubsection{Time Series Decomposition}
 
-Figure 7 shows an example of how the equalizer’s COD decomposition looks for the year 2019, where (a) shows the original COD variable, (b) the trend component, (c) the seasonal component and (d) the residual component.
+Time series decomposition is a time series analysis technique which allows to split the target variable in trend, seasonality and residual components, the combination of these 3 components lets reconstruct the original variable \cite{Cryer2008}. This approach aims to forecast each component of the time series separately to obtain the target series using the additive model stated by Pearson and presented in \autoref{eq:time-series-decomposition}
+\cite{dagum2010time}.
+
+\begin{equation}\label{eq:time-series-decomposition}
+    x_t = T_t + S_t + R_t
+\end{equation}
+
+\begin{itemize}
+    \item \begin{math}X_t\end{math} is the observed time series.
+    \item \begin{math}T_t\end{math} is the tendency or trend.
+    \item \begin{math}S_t\end{math} is the seasonal movement.
+    \item \begin{math}R_t\end{math} is the residual component.
+\end{itemize}
+
+\autoref{f:Time-series-decomposition} shows an example of how the equalizer’s COD decomposition looks like, where (a) shows the original COD variable, (b) the trend component, (c) the seasonal component and (d) the residual component.
 
 \begin{figure}[h]
 \centering
@@ -79,36 +95,34 @@ Figure 7 shows an example of how the equalizer’s COD decomposition looks for t
 \label{f:Time-series-decomposition}
 \end{figure}
 
-\subsection{Autocorrelation Study}
-Analyzing the time-series decomposition, both autocorrelation and partial autocorrelation studies were made on residual, seasonal and trend COD to extract the important characteristics. From this analysis, it was possible to conduct an autoregressive estimation of the trend and seasonal component of the series. Figures 8, 9, and 10 show the total and partial autocorrelation, respectively. 
-\subsection{Model Design}
-
-\newpage
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch4/CODd-1.png}
-\caption{Approach 1 - CODD}
-\label{f:App1-codd}
-\end{figure}
+\subsubsection{Autocorrelation Study}
+Analyzing the time-series decomposition, both autocorrelation and partial autocorrelation studies were made on residual, seasonal and trend COD to extract the important characteristics. From this analysis, it was possible to conduct an autoregressive estimation of the trend and seasonal component of the series. \autoref{f:autocorrelation} shows the total and partial autocorrelation, respectively. The horizontal axis indicates the lagged time of the variable and the vertical value the level of correlation respect to the present value.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/test2.png}
-\caption{Approach 1 - CODEQ}
-\label{f:App1-codeq}
+
+    \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/Ch4/Trend_autocorr.png}
+    \caption{ACF}
+    \label{f:auto}
+    \end{subfigure}
+\hfill
+    \begin{subfigure}{0.49\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figures/Ch4/Trend_Partial_autocorr.png}
+    \caption{PACF}
+    \label{f:partial}
+    \end{subfigure}
+
+\caption{Autocorrelation study}
+\label{f:autocorrelation}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/test.png}
-\caption{Approach 1 - MLVSS}
-\label{f:App1-MLVSS}
-\end{figure}
-
-\section{Approach 2}
+\subsection{Approach 2}
 \label{s:Approach2}
 
-The second approach uses a recurrent neural network, specifically a Long Short-Term Memory (LSTM), a powerful network architecture for sequential data which considers the effect of past values of both endogenous and exogenous variables by itself and learns possible time patterns during the training. Fig. 5 shows a general overview of the second approach. This network requires some data pre-processing to structure the data in sequences format (seven past steps are considered for this study), but nothing more than standardization is applied. 
+The second approach uses a \ac{RNN}, specifically a \ac{LSTM}, a powerful network architecture for sequential data which considers the effect of past values of both endogenous and exogenous variables by itself and learns possible time patterns during the training. \autoref{f:Approach 2} shows a general overview of the second approach. This network requires some data pre-processing to structure the data in sequences format (seven past steps are considered for this study).
 
 \begin{figure}[h]
 \centering
@@ -117,31 +131,10 @@ The second approach uses a recurrent neural network, specifically a Long Short-T
 \label{f:Approach 2}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODd-2.png}
-\caption{Approach 2 - CODD}
-\label{f:App2-codd}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODeq-2.png}
-\caption{Approach 2 - CODEQ}
-\label{f:App2-codeq}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach2.png}
-\caption{Approach 2 - MLVSS}
-\label{f:App2-MLVSS}
-\end{figure}
-
-\section{Approach 3}
+\subsection{Approach 3}
 \label{s:Approach3}
 
-The third approach proposed uses a machine learning technique based on Support Vector Machines. The Support Vector Regression (SVR) algorithm offers an accurate prediction of the time series. This model receives as inputs the exogenous variables selected from the correlation analysis. The implemented model uses Radial Base Function (RBF) kernel, gamma of 0.001, epsilon equal to 0.2 and c value of 10.
+The third approach proposed uses a machine learning technique based on Support Vector Machines. The \ac{SVR} algorithm offers an accurate prediction of the time series. This model receives as inputs the exogenous variables selected from the correlation analysis. The implemented model uses \ac{RBF} kernel, gamma of 0.001, epsilon equal to 0.2 and c value of 10.
 
 \begin{figure}[h]
 \centering
@@ -150,29 +143,71 @@ The third approach proposed uses a machine learning technique based on Support V
 \label{f:Approach 3}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODd-3.png}
-\caption{Approach 3 - CODD}
-\label{f:App3-codd}
-\end{figure}
+\section{Ensemble approaches to enhance single predictive models}
+\label{s:Ensembles}
+
+To enhance the prediction precision, an ensemble module is used to combine the output of each proposed approach. The purpose of ensemble different models is to take advantage of each model goodness and capability of recognize different patterns in the data. Several theoretical and experimental studies show that combining different predictive methods results in a more robust model and presents better performance \cite{Nourani2021}. This ensemble module could use the pre-processed exogenous variables as inputs if they are needed.
+
+Three different ensemble strategies are implemented and compared in this study. The final predictive system is presented in \autoref{f:Ensemble-approach} where the block diagram shows the models interaction in the system needed to achieve the final prediction. 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODeq-3.png}
-\caption{Approach 3 - CODEQ}
-\label{f:App3-codeq}
+\includegraphics[width=\linewidth]{figures/Ch5/Thesis-Approaches-Ensemble.png}
+\caption{Ensemble approach}
+\label{f:Ensemble-approach}
 \end{figure}
+
+\subsection{Ensemble Approach 1}
+\label{s:Ensemble-Approach1}
+The first ensemble approach proposed is a simple averaging model which is obtained by calculating the mean of the single models outputs. \autoref{eq:avg-ensemble} present the combination used in this approach. Since this average ensemble approach is one of the simplest combination it is considered as a baseline of the enhanced model. \autoref{f:Ensemble-approach1} illustrate how this ensem
+
+\begin{equation}\label{eq:avg-ensemble}
+    \hat{Y} = \frac{1}{n} \sum_{i=1}^{n}  \hat{y}_i
+\end{equation}
+
+\begin{itemize}
+    \item \begin{math}\hat{Y}\end{math} is the ensemble model prediction.
+    \item \begin{math}n\end{math} is the number of models.
+    \item \begin{math}\hat{y}_i\end{math} is each single model output.
+\end{itemize}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach3.png}
-\caption{Approach 3 - MLVSS}
-\label{f:App3-MLVSS}
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach1.png}
+\caption{Average Ensemble approach}
+\label{f:Ensemble-approach1}
 \end{figure}
 
+\subsection{Ensemble Approach 2}
+\label{s:Ensemble-Approach2}
+The second ensemble approach proposed uses a \ac{MLP} that receives the single model outputs together with the same exogenous variables used to predict that target variable as inputs. The concept is that the \ac{ANN} finds a more complex but more accurate combination of the predicted results, also the \ac{ANN} uses the exogenous variables to enhanced the final prediction even more. \autoref{f:Ensemble-approach2} shows how this ensemble approach is conceived. 
 
+\begin{itemize}
+    \item \begin{math}\hat{Y}\end{math} is the ensemble model prediction.
+    \item \begin{math}n\end{math} is the number of models.
+    \item \begin{math}\hat{y}_i\end{math} is each single model output.
+    \item \begin{math}\hat{x}_i\end{math} is each exogenous variable selected previously for that target prediction.
+    \item \begin{math}k\end{math} is the number of exogenous variables.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach2.png}
+\caption{MLP Ensemble approach}
+\label{f:Ensemble-approach2}
+\end{figure}
+
+\subsection{Ensemble Approach 3}
+\label{s:Ensemble-Approach3}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach3.png}
+\caption{Selector Ensemble approach}
+\label{f:Ensemble-approach3}
+\end{figure}
 \section{Summary}
+
 \label{s:Contribution-1-Summary}
 
 The final section of each major chapter should summarize the chapter. In comparison to the chapter, the summary should be short ($\frac{1}{2}$ to $2$ pages is normal).
