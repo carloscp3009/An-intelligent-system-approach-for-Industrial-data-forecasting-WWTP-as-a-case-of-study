@@ -1,109 +1,335 @@
-In \autoref{s:Contribution-2-Motivation} we discuss how ... \hinttext{Explain how this chapter is structured. Make sure you cover all sections!} We summarize our discussion in \autoref{s:Contribution-2-Summary}.
+This chapter presents the results of the proposed approaches implementation. Additional details of the models are presented and their performance over training and testing data. 
 
-\section{Motivation}
-\label{s:Contribution-2-Motivation}
+\section{Variables Selection}
+\label{s:results_data_selection}
+
+The Pearson correlation is calculated to select the optimal input variables for the system. \autoref{t:correlation_table} summarizes the correlation values for the three target variables where \ac{COD}\textsubscript{D}, \ac{COD}\textsubscript{EQ}, and \ac{MLVSS} are one-day a head shifted variables.
 
 \input{tables/correlation_table}
-\autoref{t:correlation_table} presents the Pearson correlation of the three target variables this study covers.
 
-\section{Major point 1}
-\label{s:Contribution-2-Major-1}
-Develop your idea! For example, discuss the axioms that underpin the inner workings of your algorithms.
+Variables that present a correlation higher than 0.2 are selected as inputs for the system. As a result the input variables for each target variable are presented below:
 
-\subsection{Minor idea 1}
-\label{s:Contribution-2-Major-1-Minor-1}
-Develop your idea! For example, explain how your algorithm actually works.
+\begin{itemize}
+    \item \textbf{COD\textsubscript{D} :} D\_SS, BT\_C\_N, EQ\_N, BT\_C\_DO, ST\_COD, EQ\_COD, D\_COD\_ON.
+    \item \textbf{COD\textsubscript{EQ} :} BT\_C\_MVLSS, D\_SS, EQ\_N, BT\_C\_N, OxT\_PH\_PM, BT\_N\_DO, Clari\_DO, ST\_COD, EQ\_COD.
+    \item \textbf{MLVSS :} BT\_C\_MVLSS, D\_SS, EQ\_N, BT\_C\_N, OxT\_PH\_PM, BT\_C\_DO, Clari\_DO, ST\_COD, EQ\_COD.
+\end{itemize}
+
+It results necessary standardize this variables in order to take them to similar level values. This step helps the model to give the same level of relevance to each input variable no matter what its magnitude value is.
+
+\begin{equation}
+    X'_i = \frac{x_i - x_{mean}}{x_{std}}
+\end{equation}
+
+\begin{itemize}
+    \item \begin{math}X'_i\end{math} is each standardized value.
+    \item \begin{math}X_i\end{math} is each raw value.
+    \item \begin{math}X_{mean}\end{math} is the mean value of the variable in the training dataset.
+    \item \begin{math}X_{std}\end{math} is the standard deviation value of the variable in the training dataset.
+\end{itemize}
+
+
+\section{Approach 1}
+\label{s:resutls-approach1}
+The first approach conducts the time series decomposition just as described in \autoref{ss:time-series-decomposition} for each target variable. It estimates the trend and seasonal components by applying auto-regression of its past values, process supported in the auto-correlation study just as mentioned in \autoref{ss:autocorrelation}. The residual component is predicted by a \ac{FFNN} that receives the inputs presented in \label{s:results_data_selection} and includes the actual residual value as an additional input feature. The \ac{FFNN} architecture and the approach prediction results are presented bellow.
+All model hyper-parameters were tuned by a grid search between following options:
+
+\begin{itemize}
+    \item Loss = [mse, mae]
+    \item Optimizer = [SGD, adam]
+    \item Activation = [linear, tanh]
+    \item Number of Layers = [1, 2]
+    \item Number of Neurons per layer = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+    \item Batch Normalization = [0, 1]
+\end{itemize}
+
+\subsection{COD Discharge}
+\autoref{f:App1-codd-nn} shows the structure of the \ac{FFNN} used for \ac{COD}\textsubscript{D} residual prediction which hyper-parameters are presented below. \autoref{f:App1-codd} shows the prediction results of this approach where the orange line corresponds to model prediction over the training data, the red line to the model prediction over the testing samples and finally the blue one indicates the actual value the target variable takes.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/CODd-1.png}
-\caption{Approach 1 - CODD}
+ \includegraphics[width=0.4\linewidth]{figures/Ch5/App1_CODeq.png}
+\caption{Approach 1 - COD\textsubscript{D} Network}
+\label{f:App1-codd-nn}
+\end{figure}
+
+\begin{figure}[hb!]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-1.png}
+\caption{Approach 1 - COD\textsubscript{D}}
 \label{f:App1-codd}
 \end{figure}
 
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = SGD
+    \item Activation =  tanh
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [6, 24]
+    \item Batch Normalization = 1
+\end{itemize}
+
+\subsection{COD Equalizer}
+\autoref{f:App1-codeq-nn} shows the structure of the \ac{FFNN} used for \ac{COD}\textsubscript{EQ} residual prediction which hyper-parameters are presented below. \autoref{f:App1-codd} shows the prediction results of this approach.
+
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = SGD
+    \item Activation =  Linear
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [10, 18]
+    \item Batch Normalization = 1
+\end{itemize}
+
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/test2.png}
-\caption{Approach 1 - CODEQ}
-\label{f:App1-codeq}
+\includegraphics[width=0.4\linewidth]{figures/Ch5/App1_CODd.png}
+\caption{Approach 1 - COD\textsubscript{EQ} Network}
+\label{f:App1-codeq-nn}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/test.png}
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-1.png}
+\caption{Approach 1 - COD\textsubscript{EQ}}
+\label{f:App1-codeq}
+\end{figure}
+
+\subsection{MLVSS}
+
+\autoref{f:App1-MLVSS-nn} shows the structure of the \ac{FFNN} used for \ac{MLVSS} residual prediction which hyper-parameters are presented below. \autoref{f:App1-MLVSS} shows the prediction results of this approach.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.4\linewidth]{figures/Ch5/App1_MLVSS.png}
+\caption{Approach 1 - MLVSS Network}
+\label{f:App1-MLVSS-nn}
+\end{figure}
+
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = SGD
+    \item Activation =  Relu
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [14, 22]
+    \item Batch Normalization = 1
+\end{itemize}
+%------------------------------------------------
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-approach1.png}
 \caption{Approach 1 - MLVSS}
 \label{f:App1-MLVSS}
 \end{figure}
 
-\subsection{Minor idea 2}
-\label{s:Contribution-2-Major-1-Minor-2}
-Develop your idea! For example, explain how the theoretical limits of your approach.
+
+
+
+
+\section{Approach 2}
+The \ac{LSTM} architecture for each target variable and the approach prediction results are presented bellow. The \ac{LSTM} network implemented takes until 7 past days to predict one day a head.
+All model hyper-parameters were tuned by a grid search within the following options:
+
+\begin{itemize}
+    \item Loss = [mse, mae]
+    \item Optimizer = [SGD, adam]
+    \item Activation = [Relu, linear, tanh]
+    \item Number of Layers = [1, 2]
+    \item Number of Neurons per layer = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+    \item Batch Normalization = [0, 1]
+    \item Dropout = [0, 1]
+\end{itemize}
+
+For Batch normalization and Dropout 0 means they are not included in the network.
+
+\subsection{COD Discharge}
+\autoref{f:App2-codd-nn} shows the structure of the \ac{LSTM} used for \ac{COD}\textsubscript{D} prediction which hyper-parameters are presented below. \autoref{f:App2-codd} shows the prediction results of this approach.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODd-2.png}
-\caption{Approach 2 - CODD}
+ \includegraphics[width=0.4\linewidth]{figures/Ch5/App2_CODd.png}
+\caption{Approach 2 - COD\textsubscript{D} LSTM Network}
+\label{f:App2-codd-nn}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-2.png}
+\caption{Approach 2 - COD\textsubscript{D}}
 \label{f:App2-codd}
 \end{figure}
 
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = SGD
+    \item Activation =  Tanh
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [4, 32]
+    \item Batch Normalization = 0
+    \item Dropout = 1
+\end{itemize}
+
+\subsection{COD Equalizer}
+\autoref{f:App2-codeq-nn} shows the structure of the \ac{LSTM} used for \ac{COD}\textsubscript{EQ} prediction which hyper-parameters are presented below. \autoref{f:App2-codeq} shows the prediction results of this approach.
+
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = Adam
+    \item Activation =  Tanh
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [2, 18]
+    \item Batch Normalization = 1
+    \item Dropout = 0
+\end{itemize}
+
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODeq-2.png}
-\caption{Approach 2 - CODEQ}
-\label{f:App2-codeq}
+ \includegraphics[width=0.4\linewidth]{figures/Ch5/App2_CODeq.png}
+\caption{Approach 2 - COD\textsubscript{EQ} LSTM Network}
+\label{f:App2-codeq-nn}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach2.png}
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-2.png}
+\caption{Approach 2 - COD\textsubscript{EQ}}
+\label{f:App2-codeq}
+\end{figure}
+
+\subsection{MLVSS}
+\autoref{f:App2-MLVSS-nn} shows the structure of the \ac{LSTM} used for \ac{MLVSS} prediction which hyper-parameters are presented below. \autoref{f:App2-MLVSS} shows the prediction results of this approach.
+
+\begin{figure}[h]
+\centering
+ \includegraphics[width=0.4\linewidth]{figures/Ch5/App2_MLVSS.png}
+\caption{Approach 2 - MLVSS LSTM Network}
+\label{f:App2-MLVSS-nn}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-approach2.png}
 \caption{Approach 2 - MLVSS}
 \label{f:App2-MLVSS}
 \end{figure}
 
-\subsection{Minor idea 3}
-\label{s:Contribution-2-Major-1-Minor-3}
-Develop your idea! For example, explain how the theoretical limits of your approach.
+\begin{itemize}
+    \item Loss = mse
+    \item Optimizer = Adam
+    \item Activation =  Linear
+    \item Number of Layers = 2
+    \item Number of Neurons per layer = [4, 10]
+    \item Batch Normalization = 1
+    \item Dropout = 0
+\end{itemize}
 
-\begin{figure}[h]
+%-----------------------------------------------
+\section{Approach 3}
+
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODd-3.png}
-\caption{Approach 3 - CODD}
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-3.png}
+\caption{Approach 3 - COD\textsubscript{D}}
 \label{f:App3-codd}
 \end{figure}
 
-\begin{figure}[h]
+The last approach predicts using \ac{SVR} algorithm.
+
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/CODeq-3.png}
-\caption{Approach 3 - CODEQ}
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-3.png}
+\caption{Approach 3 - COD\textsubscript{EQ}}
 \label{f:App3-codeq}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch6/MVLSS-approach3.png}
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-approach3.png}
 \caption{Approach 3 - MLVSS}
 \label{f:App3-MLVSS}
 \end{figure}
 
-\section{Major point 2}
-\label{s:Contribution-2-Major-2}
-Develop your idea! For example, discuss the difficulties when implementing the proposed algorithm in software.
+This third model sometimes presents a shift prediction respect the expected value, nonetheless it achieves a good prediction. \autoref{f:App3-codd}, \autoref{f:App3-codeq}, and \autoref{f:App3-MLVSS} show the prediction results of this approach. 
+\clearpage
 
-\subsection{Minor idea 1}
-\label{s:Contribution-2-Major-2-Minor-1}
-Develop your idea! For example, properties of your implementation.
+%-----------------------------------------------
+\section{Ensemble Approach 1 - Average}
+The first ensemble approach makes an average of all three models presented before. \autoref{f:avg-codd}, \autoref{f:avg-codeq} and \autoref{f:avg-MLVSS} show the results of the average ensemble prediction for COD\textsubscript{D}, COD\textsubscript{EQ}, and MLVSS, respectively. 
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-avg.png}
+\caption{Average Ensemble - COD\textsubscript{D}}
+\label{f:avg-codd}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-avg.png}
+\caption{Average Ensemble - COD\textsubscript{EQ}}
+\label{f:avg-codeq}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-E_avg.png}
+\caption{Average Ensemble - MLVSS}
+\label{f:avg-MLVSS}
+\end{figure}
 
-\subsection{Minor idea 2}
-\label{s:Contribution-2-Major-2-Minor-2}
-Develop your idea! For example, the particular properties of your implementation.
+%-----------------------------------------------
+\section{Ensemble Approach 2 - MLP Fusion}
+The second ensemble approach fuses all three models output presented before using a \ac{MLP}, and uses the exogenous variables as information source to enhance the final prediction. \autoref{f:avg-codd}, \autoref{f:avg-codeq} and \autoref{f:avg-MLVSS} show the results of the \ac{MLP} fusion ensemble prediction for the target variables. 
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-ann.png}
+\caption{MLP Ensemble - COD\textsubscript{D}}
+\label{f:ann-codd}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-ann.png}
+\caption{MLP Ensemble - COD\textsubscript{EQ}}
+\label{f:ann-codeq}
+\end{figure}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-E_ann.png}
+\caption{MLP Ensemble - MLVSS}
+\label{f:ann-MLVSS}
+\end{figure}
 
-\section{Summary}
+%-----------------------------------------------
+\section{Ensemble Approach 3 - Selection}
+The last ensemble approach predict which model will perform the best based on the process conditions which are represented by the exogenous variables. This prediction allows to select one of the single model as the most suitable one to carry out the prediction. \autoref{f:avg-codd}, \autoref{f:avg-codeq} and \autoref{f:avg-MLVSS} show the results of this ensemble approach prediction for the target variables. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODd-ann2.png}
+\caption{MLP Ensemble - COD\textsubscript{D}}
+\label{f:ann2-codd}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/CODeq-ann2.png}
+\caption{MLP Ensemble - COD\textsubscript{EQ}}
+\label{f:ann2-codeq}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch5/MVLSS-E_ann2.png}
+\caption{MLP Ensemble - MLVSS}
+\label{f:ann2-MLVSS}
+\end{figure}
+
+\section{Discussion}
 \label{s:Contribution-2-Summary}
 
-Summarize contribution 2. Highlight what makes it relevant. Assuming that the reader knows the details of the contribution now, you should also try to clearly explain in what particular key properties this method deviates from existing research.
+This chapter presents the implementation and obtained results of 3 approaches to predict time series variables of the wastewater treatment process. Also, 3 different ensemble approaches are presented in order to enhance the intelligent system prediction performance.
+\autoref{t:Results} summarizes the \ac{MAPE} results obtained by the single models and the ensembles approaches. It is worth to mention that hyper-parameter tune was made using the training set as well as the evaluation of ensemble model enhancement. The best model performance over the training is highlighted in bold. The ensemble models offer a more robust prediction and present some improvements in \ac{MAPE}\%.
+\input{tables/MAPEs}

@@ -38,13 +38,13 @@ Work \cite{Guo2015} aims to predict one day interval \ac{TN} concentration of ef
 
 Recurrent neural networks are also used to in wastewater data-driven modelling. \cite{Yaqub2020} uses \ac{LSTM} Neural Networks to predict removal efficiency of NH4-N, \ac{TN}, and \ac{TP} from a \ac{WWTP} at Okcheon, Republic of Korea. A year of data with hourly frequency measurements constitute the dataset used for this work. A set of 5000 data points build the sequences of 10 previous observations used to train the  \ac{LSTM} model. The testing step shows the \ac{MSE} values of 0.0047, 0.015, and 0.018 respectively, by using 1876 new data points. Study \cite{Kang2020} proposes a \ac{LSTM} and compares the results with \ac{SVM}, \ac{GRU} Neural Network, and standard  \ac{Bi-LSTM}. Experiments show that \ac{Bi-LSTM} performs at least as well as other models and obtain better results in some scenarios.
 
-A \ac{GRNN} is implemented in \cite{Heddam2016}, a network architecture made of four layers: the input layer, the pattern layer, the summation layer, and the output one. This architecture offers a high performance in non-linear regression analysis, reason why it is used to estimate the effluent BOD based on other effluent parameters. Results are compared with a \ac{MLR} showing that the GRNN performs better for the BOD estimation, achieving \begin{math}R^2\end{math} of 0.75 and 0.80 for training and testing, where 553 and 138 samples are respectively used. 
+A \ac{GRNN} is implemented in \cite{Heddam2016}, a network architecture made of four layers: the input layer, the pattern layer, the summation layer, and the output one. This architecture offers a high performance in non-linear regression analysis, reason why it is used to estimate the effluent \ac{BOD} based on other effluent parameters. Results are compared with a \ac{MLR} showing that the \ac{GRNN} performs better for the \ac{BOD} estimation, achieving \begin{math}R^2\end{math} of 0.75 and 0.80 for training and testing, where 553 and 138 samples are respectively used. 
 
-\cite{Baki2019} test the predictive capabilities of diverse regression models used to estimate the BOD in the Antalya Hurma\ac{WWTP}. The study implements four different methods, classical regression analysis, Multivariate Adaptive Regression Splines, Artificial Bee Colony, and teaching learning-based optimization. \cite{Baki2019} uses 186 samples corresponding to 80\% of the available data to train all four proposed techniques, which yield \begin{math}R^2\end{math} values of 0.74, 0.79, 0.78, and 0.74 over the test dataset.
+\cite{Baki2019} test the predictive capabilities of diverse regression models used to estimate the \ac{BOD} in the Antalya Hurma \ac{WWTP}. The study implements four different methods, classical regression analysis, Multivariate Adaptive Regression Splines, Artificial Bee Colony, and teaching learning-based optimization. \cite{Baki2019} uses 186 samples corresponding to 80\% of the available data to train all four proposed techniques, which yield \begin{math}R^2\end{math} values of 0.74, 0.79, 0.78, and 0.74 over the test dataset.
 
-\cite{Guo2020} innovates in the use of\ac{CNN} together with Recurrent Neural Networks. The system proposed  uses a convolution layer, a pooling layer, and a fully connected layer as feature extractor, follow by an \ac{LSTM} to achieve the \ac{COD} and Ammonia Nitrogen prediction in the outlet of a sewage treatment plant located in Nan'an District, Chongqing, China.
+\cite{Guo2020} innovates in the use of \ac{CNN} together with \ac{RNN}s. The system proposed  uses a convolution layer, a pooling layer, and a fully connected layer as feature extractor, follow by an \ac{LSTM} to achieve the \ac{COD} and Ammonia Nitrogen prediction in the outlet of a sewage treatment plant located in Nan'an District, Chongqing, China.
 
-Work \cite{Nourani2018} compares the performance of \ac{FFNN}, \ac{ANFIS}, \ac{SVR}, and \ac{MLR} models to predict \ac{COD}, BOD, and \ac{TN} at the Nicosia\ac{WWTP} effluent stream. An averaging unit combines the output of the four models improving the final prediction up to 24\%. Three different ensemble techniques are implemented, all of them present R2 higher than 0.8 in validation. Another example of ensemble learner \cite{Nourani2021} utilizes \ac{FFNN}, \ac{SVR}, \ac{ANFIS}, and \ac{ARIMA} to predict \ac{COD} and BOD effluent in Tabriz \ac{WWTP}. Additional to the ensemble jittered data is used to enhance the model learning capabilities. Results show that both ensemble techniques and jittered data improved the system predictive performance where the ensemble jittering model exhibits \begin{math}R^2\end{math} of 0.85/0.86 (\ac{COD}/\ac{BOD}) in comparison with \begin{math}R^2\end{math} of 0.82/0.81 with the standard ensemble model.  
+Work \cite{Nourani2018} compares the performance of \ac{FFNN}, \ac{ANFIS}, \ac{SVR}, and \ac{MLR} models to predict \ac{COD}, \ac{BOD}, and \ac{TN} at the Nicosia \ac{WWTP} effluent stream. An averaging unit combines the output of the four models improving the final prediction up to 24\%. Three different ensemble techniques are implemented, all of them present R2 higher than 0.8 in validation. Another example of ensemble learner \cite{Nourani2021} utilizes \ac{FFNN}, \ac{SVR}, \ac{ANFIS}, and \ac{ARIMA} to predict \ac{COD} and \ac{BOD} effluent in Tabriz \ac{WWTP}. Additional to the ensemble jittered data is used to enhance the model learning capabilities. Results show that both ensemble techniques and jittered data improved the system predictive performance where the ensemble jittering model exhibits \begin{math}R^2\end{math} of 0.85/0.86 (\ac{COD}/\ac{BOD}) in comparison with \begin{math}R^2\end{math} of 0.82/0.81 with the standard ensemble model.  
 
 \section{Intelligent Control}
 \label{s:RelatedWorks-Control}
@@ -66,9 +66,11 @@ Reference \cite{Ye2020} is a review of developments in artificial intelligence t
 
 There is a research branch whose aim is the opportune fault detection in very stringent processes, especially when it is part of the operational critical path where any unexpected event that occurs leads to a stagnation. Depending on the type of fault detection, the prediction of the problem can be focused on:
 
-- The system’s ability to operate under some given circumstances.
+\begin{itemize}
+ \item	The system’s ability to operate under some given circumstances.
+ \item	The time range in which equipment needs no maintenance and logistic support \cite{Alsina2018}.
+\end{itemize}
 
-- The time range in which equipment needs no maintenance and logistic support \cite{Alsina2018}.
 
 Regarding system operability, faults and potential causes can be found before they occur by analyzing some patterns in \ac{WWTP} data. The data visualization is capable of showing patterns that are products of a possible anomaly, known as abnormal patterns. These are classified as isolated, sustained, transient and drift \cite{Newhart2019}. Each one provides a hint about a future fault. Thus, it is possible to get fault information by looking at data behavior. Reference \cite{Dairi2019} implemented data-driven unsupervised anomaly detection approaches based on deep learning methods and clustering algorithms. The aim was to monitor and detect anomaly conditions in \ac{WWTP} operations. The results showed its ability to detect the vast majority of abnormal events reported by the operator \cite{Dairi2019}. 
 
@@ -88,7 +90,7 @@ For paper \cite{Han2018}, a data-driven intelligent monitoring system was implem
 
 \cite{Shen2018} compares the performance of four models; a multi-layer perceptron Neural Network trained with \ac{L-M} algorithm, a backpropagation trained Neural Network, a \ac{RBNN}, and a \ac{GRNN}. All four model are trained with 410 samples representing the 75\% of the whole data and the results show that \ac{RBNN} outperform the others obtaining a \ac{MAPE} of 13.7\%/14.4\% and \begin{math}R^2\end{math} of 0.92/0.91 for training and validation, respectively.
 
-Other research introduces the use of \ac{FL} especially combined with another computational technique to enhance its performance. \cite{Huang2015} uses a neural fuzzy system combined with a \ac{GA} to estimate real-time nutrient concentrations in a biological stage of a wastewater treatment process. The GA-NFS soft-sensor estimates nitrogen and phosphorus concentration, and \ac{COD} obtaining \ac{MAPE}s of 16.18\%, 24.56\% and 7.8\% respectively. They encourage the addition of the GA component comparing this GA-NFS with a simple NFS, which obtained \ac{MAPE}s of 31.86\%, 26.19\% and 22.79\% for each variable, demonstrating the impact of the optimization.
+Other research introduces the use of \ac{FL} especially combined with another computational technique to enhance its performance. \cite{Huang2015} uses a \ac{NFS} combined with a \ac{GA} to estimate real-time nutrient concentrations in a biological stage of a wastewater treatment process. The GA-NFS soft-sensor estimates nitrogen and phosphorus concentration, and \ac{COD} obtaining \ac{MAPE}s of 16.18\%, 24.56\% and 7.8\% respectively. They encourage the addition of the GA component comparing this \ac{GA}-\ac{NFS} with a simple \ac{NFS}, which obtained \ac{MAPE}s of 31.86\%, 26.19\% and 22.79\% for each variable, demonstrating the impact of the optimization.
 
 \section{Data Tools}
 \label{s:Related-Works-Data-Tools}
@@ -97,21 +99,27 @@ Nowadays, since the world creates new data every single second, it has had to lo
 
 \input{tables/data_tools_table}
 
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
-\includegraphics[width=16cm]{figures/Ch3/BigDataTools.PNG}
+\includegraphics[width=\linewidth]{figures/Ch3/BigDataTools.PNG}
 \caption{SAS, R or Python preferences \cite{Siddiqui2015}}
 \label{f:soft-preferences}
 \end{figure}
 
-\section{Summary}
-\label{s:Related-Works-Summary}
-
-The final section of each major chapter should summarize the chapter. In comparison to the chapter, the summary should be short ($\frac{1}{2}$ to $2$ pages is normal).
-
-\begin{figure}[t]
+\begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch3/PaperTable.jpg}
-\caption{Number of papers per technique, for different purposes (only the main purpose of the method for each paper was considered), regions and background from the authors of the publications.}
+\includegraphics[width=0.9\linewidth]{figures/Ch3/PaperTable.jpg}
+\caption{Techniques in WWT  \cite{Corominas2018}.}
 \label{f:Papers Table}
 \end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/Ch3/Prediction_model_dist.png}
+\caption{Techniques used for Prediction in WWT field}
+\label{f:techniques-prediction}
+\end{figure}
+
+\autoref{f:Papers Table} presented by \cite{Corominas2018} shows the number of papers per technique used in \ac{WWT}, categorized based on purposes, countries and  the authors background. The search was made in SCOPUS and results includes papers until year 2015, papers published before 2010 and with no more than 5 citations were not included. \autoref{f:techniques-prediction} summarizes the \ac{ML} techniques distribution used for prediction and presented in \autoref{s:RelatedWorks-variablePrediction}. \ac{FFNN}, \ac{ANFIS}, \ac{SVM} are place in the top 3 being the most used ones.
+%\section{Summary}
+%\label{s:Related-Works-Summary}
