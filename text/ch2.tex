@@ -1,9 +1,9 @@
-This chapter provides background information that will help the reader to understand the research, it introduces general concepts of the wastewater treatment and computational techniques. 
+This chapter provides background information that will help the reader understand the research, and it introduces general concepts of wastewater treatment and computational techniques. 
 
 \section{Wastewater Treatment}
 \label{s:First-Background-Topic}
 
-\ac{WWT} aims to reduce different contaminants present in water from a diversity of sources. The wastewater pass through several processes to remove the contaminants (mainly nutrients and solids) until the water reaches the standards of quality established by the corresponding regulatory authorities for discharging to a water body or to reuse it. The \ac{WWTP}s are the facilities in charge of this process and involve different stages to achieve their goal. After receiving the raw wastewater, the \ac{WWTP} starts with a physical treatment which comprises the use of screens, grilles and grit traps to remove solids and materials of large size. Then, it is involved the primary treatment to reduce and degrade diverse nutrients and organic compounds, most of the cases it is a Biological or chemical process. After the primary treatment there is a settling or clarifier that allows to separate the already translucent water from some sludge remaining. The cleaner water overflows the clarifier to a final stage of disinfection and pH adjustments to discharge it to the water body minimizing the impact on the ecosystem.
+\ac{WWT} aims to reduce different contaminants present in water from a diversity of sources. The wastewater passes through several processes to remove the contaminants (mainly nutrients and solids) until the water reaches the standards of quality established by the corresponding regulatory authorities for discharging to a water body or reusing it. The \ac{WWTP}s are the facilities in charge of this process and involve different stages to achieve their goal. After receiving the raw wastewater, the \ac{WWTP} starts with a physical treatment which comprises the use of screens, grilles and grit traps to remove solids and materials of large size. Then, it is involved in the primary treatment to reduce and degrade diverse nutrients and organic compounds. In most cases, it is a biological or chemical process. After the primary treatment, a settling or clarifier allows separating the already translucent water from some remaining sludge. The cleaner water overflows the clarifier to a final stage of disinfection and pH adjustments to discharge it to the water body, minimising the ecosystem's impact.
 
 \begin{figure}[h]
 \centering
@@ -12,8 +12,8 @@ This chapter provides background information that will help the reader to unders
 \label{f:wwtp}
 \end{figure}
 
-\autoref{f:wwtp} shows the design of a typical \ac{WWTP}, based on the treatment requirements and water contaminants, it results necessary to include some filters, additional settling or equalization tanks.
-The \ac{ASP}, a type of Biological treatment, is one of the most used treatments to reduce organic matter (\ac{BOD}, \ac{COD}), nutrients (\ac{TN}, \ac{TP}) and \ac{SS}. In the \ac{ASP}, a microbiological population (mainly protozoa and different types of bacteria) degrade and consume the organic compounds. Most of them require oxygen to live and to commit the task, reason why the bioreactor is usually aerated, providing the right level of \ac{DO} \cite{Haimi2013}. The water flows from the bioreactor to a secondary clarifier which split the clean water and the settled sludge (usually a fraction of the sludge is return to the bioreactor). \autoref{f:ASP} illustrates the \ac{ASP} in a biological stage of a \ac{WWTP}.
+\autoref{f:wwtp} shows the design of a typical \ac{WWTP}, based on the treatment requirements and water contaminants results necessary to include some filters, additional settling or equalization tanks.
+The \ac{ASP}, a type of Biological treatment, is one of the most used treatments to reduce organic matter (\ac{BOD}, \ac{COD}), nutrients (\ac{TN}, \ac{TP}) and \ac{SS}. In the \ac{ASP}, a microbiological population (mainly protozoa and different types of bacteria) degrade and consume the organic compounds. Most of them require oxygen to live and to commit the task, the reason why the bioreactor is usually aerated, providing the right level of \ac{DO} \cite{Haimi2013}. The water flows from the bioreactor to a secondary clarifier which splits the clean water and the settled sludge (usually a fraction of the sludge is returned to the bioreactor). \autoref{f:ASP} illustrates the \ac{ASP} in a biological stage of a \ac{WWTP}.
 
 \begin{figure}[h]
 \centering
@@ -23,21 +23,21 @@ The \ac{ASP}, a type of Biological treatment, is one of the most used treatments
 \end{figure}
 
 \subsection{Biochemical Oxygen Demand}
-The \ac{BOD} is the amount of oxygen required by the microorganisms to break down organic matter for certain period of time (BOD\textsubscript{5}, BOD\textsubscript{10} or BOD\textsubscript{20} where the subscript refers to the number of days, being BOD\textsubscript{5} test the most common one) in a closed container at certain temperature and pH conditions \cite{Wiesmann2007}. \ac{BOD} is used as a measurement of the water quality. The higher level of pollution the higher the amount of organic matter, therefore microorganisms required more oxygen to degrade it.
+The \ac{BOD} is the amount of oxygen required by the microorganisms to break down organic matter for a certain period of time (BOD\textsubscript{5}, BOD\textsubscript{10} or BOD\textsubscript{20} where the subscript refers to the number of days, being BOD\textsubscript{5} test the most common one) in a closed container at specific temperature and pH conditions \cite{Wiesmann2007}. \ac{BOD} is used as a measurement of water quality. The higher level of pollution, the higher the amount of organic matter; therefore, microorganisms require more oxygen to degrade it.
 
 \subsection{Chemical Oxygen Demand}
-The \ac{COD} is the amount of oxygen required to fully oxidize an organic compound in water \cite{Wiesmann2007}. Its measurement requires the use of an oxidant, typically potassium dichromate, to chemically oxidize the organic matter (reaction that consume Oxygen). After the process, the sample is analyzed using an spectrophotometer. Similar to \ac{BOD}, the \ac{COD} works as an indicator of the water quality, an it is very useful in the evaluation of the wastewater treatment efficiency.
+The \ac{COD} is the amount of oxygen required to entirely oxidize an organic compound in water \cite{Wiesmann2007}. Its measurement requires the use of an oxidant, typically potassium dichromate, to chemically oxidize the organic matter (a reaction that consumes oxygen). After the process, the sample is analyzed using a spectrophotometer. Similar to \ac{BOD}, the \ac{COD} works as an indicator of the water quality, and it is handy in evaluating the wastewater treatment efficiency.
 
 \subsection{Volatile Suspended Solids}
-In wastewater, there are some settleable solids and non-settleable solids which are suspended in the fluid \cite{Wiesmann2007}. Within the \ac{SS} there is the \ac{MLVSS} which represents the amount of biomass present in the activated sludge. For an efficient pollutants removal process is needed to find a balance between the amount of organic matter (\ac{COD} or \ac{BOD}) and the microorganisms available (\ac{MLVSS}). This relationship is called F/M.
+In wastewater, there are some settleable solids and non-settleable solids suspended in the fluid \cite{Wiesmann2007}. Within the \ac{SS}, the \ac{MLVSS} represents the amount of biomass present in the activated sludge. An efficient pollutants removal process requires balancing the amount of organic matter (\ac{COD} or \ac{BOD}) and the microorganisms available (\ac{MLVSS}). This relationship is called F/M.
 
 \subsection{Dissolved Oxygen}
-\ac{DO} is a relevant factor for the organic matter removal in wastewater treatment process. In the Biological stage must be guaranteed enough \ac{DO} to accomplish the degradation and nitrification of organic matter. Insufficient \ac{DO} level complicates the degradation for the microorganisms. On the other hand, excess of \ac{DO} involves higher energy consumption and lower efficiency in the process \cite{Zhao2021}. 
+\ac{DO} is a relevant factor for organic matter removal in the wastewater treatment process. The biological stage must guarantee enough \ac{DO} to accomplish the degradation and nitrification of organic matter. Insufficient \ac{DO} level complicates the degradation for the microorganisms. On the other hand, excess of \ac{DO} involves higher energy consumption and lower efficiency in the process \cite{Zhao2021}. 
 
 \section{Machine Learning}
 \label{s:Second-Background-Topic}
 
-\ac{ML} is an area of the \ac{AI} where a computer is programmed to learn form data \cite{Ray2019}. In 1959 Arthur Samuel defined the \ac{ML} as \textbf{the field of study that gives the computers the ability to learn without being explicitly programmed}. Almost 40 years later, Tom Mitchell described \ac{ML} as follows: \textbf{A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.} \autoref{f:AI} shows how the \ac{ML} fits in the \ac{AI} world and presents \ac{DL} as part of \ac{ML} which is described in detail in \autoref{s:Second-Background-Deep-Learning}.
+\ac{ML} is an area of \ac{AI} where a computer is programmed to learn from data \cite{Ray2019}. In 1959 Arthur Samuel defined the \ac{ML} as \textbf{the field of study that gives computers the ability to learn without being explicitly programmed}. Almost 40 years later, Tom Mitchell described \ac{ML} as follows: \textbf{A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.} \autoref{f:AI} shows how the \ac{ML} fits in the \ac{AI} world and presents \ac{DL} as part of \ac{ML} which is described in detail in \autoref{s:Second-Background-Deep-Learning}.
 
 \begin{figure}[h]
 \centering
@@ -90,7 +90,8 @@ This category of \ac{ML} algorithms aim to find a function capable of represent 
 \label{f:supervised-learning}
 \end{figure}
 
-\autoref{f:supervised-learning} present a diagram of how Supervised Learning works\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}. During the training process the model receives the input samples and returns a prediction output for each one using the current parameters values. Each prediction is compared with the expected result, and the difference between them serve as feedback to the model so it can updates the parameters and minimize the error for further iterations.
+\autoref{f:supervised-learning} present a diagram of how Supervised Learning works%\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}
+. During the training process the model receives the input samples and returns a prediction output for each one using the current parameters values. Each prediction is compared with the expected result, and the difference between them serve as feedback to the model so it can updates the parameters and minimize the error for further iterations.
 
 This type of machine learning is used for both classification and regression problems. Classification is the task of identify the membership of a sample to a category or class, while regression aims to estimate a target numerical value based on the inputs. \autoref{f:classification-regression} presents an example of classification and regression problem. The former uses the information of two genes (input samples) to determine if the subject in study is healthy or suffers a disease, the vertical line depicts the decision boundary of the classification model. The latter, aims to estimate the number of years of the life expectancy for a patient considering some given features\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}. 
 
@@ -196,7 +197,7 @@ Lots of today's inventions are inspired in nature and environment phenomena. Wel
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch2/Perceptron.pdf}
+\includegraphics[width=\linewidth]{figures/Ch2/Perceptron.png}
 \caption{Perceptron simple}
 \label{f:Perceptron}
 \end{figure}
