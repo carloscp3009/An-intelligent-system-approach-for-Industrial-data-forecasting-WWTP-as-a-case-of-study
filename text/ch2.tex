@@ -46,7 +46,7 @@ In wastewater, there are some settleable solids and non-settleable solids suspen
 \label{f:AI}
 \end{figure}
 
-Now a days machine Learning is used in a variety of fields such as: robotics, biology, social science, virtual personal assistants, computer games, autonomous driving, pattern recognition, natural language processing, computer vision, product recommendation, market prediction, medical diagnosis, fraud detection, agriculture advisory, Bots, climatology, social media services, among others \cite{Srivastava_2019, Shinde_2018, Ray2019}, \autoref{f:Ml-app} shows some of the \ac{ML} application domains. 
+Nowadays, Machine Learning is used in a variety of fields such as robotics, biology, social science, virtual personal assistants, computer games, autonomous driving, pattern recognition, natural language processing, computer vision, product recommendation, market prediction, medical diagnosis, fraud detection, agriculture advisory, Bots, climatology, social media services, among others \cite{Srivastava_2019, Shinde_2018, Ray2019}. \autoref{f:Ml-app} shows some of the \ac{ML} application domains. 
 
 \begin{figure}[t]
 \centering
@@ -62,7 +62,8 @@ Now a days machine Learning is used in a variety of fields such as: robotics, bi
 \label{f:Traditional-approach}
 \end{figure}
 
-An important milestone was the transition from rule based programming to programs that learn automatically based on experience by the use of data. \autoref{f:Traditional-approach} shows how the rule based approach works, it starts by studying the problem, identifying some patterns and building a set of rules based on them. Subsequently, the system is evaluated and the rules are adjusted continuously in an iterative process until a good enough performance is achieved \cite{geron2017}. Should be noted that the bigger the problem the more complex the rules and more difficult the pattern identification task becomes. Meanwhile, \ac{ML} programs improve their performance during the training phase, usually presenting shorter programs, more maintainable, and more accurate. Some studies that compare the results of these data analysis methods evidence that the first tends to provide stronger scientifically sounder information, statistical assessment and uncertainty estimations, but the latter tends to bring forward better accuracy in the majority of works \cite{geron2017,Ye2020}. \autoref{f:ML-approach} illustrates the \ac{ML} approach to solve problems.
+A significant milestone was the transition from rule-based programming to programs that learn automatically based on experience using data. \autoref{f:Traditional-approach} shows how the rule-based approach works; it starts by studying the problem, identifying some patterns, and building a set of rules based on them. Subsequently, the system is evaluated, and the rules are adjusted continuously in an iterative process until a good enough performance is achieved \cite{geron2017}. It should be noted that the bigger the problem, the more complex the rules and the more difficult the pattern identification task becomes. Meanwhile, \ac{ML} programs improve their performance during the training phase, usually presenting shorter programs, more maintainable, and more accurate. Some studies that compare the results of these data analysis methods evidence that the first tends to provide more decisive scientifically sounder information, statistical assessment, and uncertainty estimations. Still, the latter tends to bring forward better accuracy in most works \cite{geron2017,Ye2020}. \autoref{f:ML-approach} illustrates the \ac{ML} approach to solve problems.
+
 
 \begin{figure}[t]
 \centering
@@ -78,10 +79,10 @@ An important milestone was the transition from rule based programming to program
 \label{f:ML-App-by-type}
 \end{figure}
 
-There are different types of \ac{ML} systems, and they can be classified based on human supervision as supervised learning, unsupervised learning and reinforcement learning. \autoref{f:ML-App-by-type} shows the main tasks of each \ac{ML} type and some of their applications\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}.
+There are different types of \ac{ML} systems, and they can be classified based on human supervision as supervised learning, unsupervised learning, and reinforcement learning. \autoref{f:ML-App-by-type} shows the main tasks of each \ac{ML} type and some of their applications\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}.
 
 \subsection{Supervised Learning}
-This category of \ac{ML} algorithms aim to find a function capable of represent the relationship between the input and output variables from a given set of data. It is called supervised since it infers the function from labelled examples during the training stage, which means that for each input sample there is an associated and known output sample assigned by a human supervisor \cite{Batta2020}.
+This category of \ac{ML} algorithms aims to find a function capable of representing the relationship between the input and output variables from a given set of data. It is called supervised since it infers the function from labeled examples during the training stage, which means that for each input sample, there is an associated and known output sample assigned by a human supervisor \cite{Batta2020}.
 
 \begin{figure}[h]
 \centering
@@ -91,9 +92,9 @@ This category of \ac{ML} algorithms aim to find a function capable of represent 
 \end{figure}
 
 \autoref{f:supervised-learning} present a diagram of how Supervised Learning works%\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}
-. During the training process the model receives the input samples and returns a prediction output for each one using the current parameters values. Each prediction is compared with the expected result, and the difference between them serve as feedback to the model so it can updates the parameters and minimize the error for further iterations.
+. The model receives the input samples during the training process and returns a prediction output for each one using the current parameters' values. Each prediction is compared with the expected result. The difference between them serves as feedback to the model so it can update the parameters and minimize the error for further iterations.
 
-This type of machine learning is used for both classification and regression problems. Classification is the task of identify the membership of a sample to a category or class, while regression aims to estimate a target numerical value based on the inputs. \autoref{f:classification-regression} presents an example of classification and regression problem. The former uses the information of two genes (input samples) to determine if the subject in study is healthy or suffers a disease, the vertical line depicts the decision boundary of the classification model. The latter, aims to estimate the number of years of the life expectancy for a patient considering some given features\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}. 
+This type of \ac{ML} is used for both classification and regression problems. Classification is the task of identifying the membership of a sample to a category or class, while regression aims to estimate a numerical target value based on the inputs. \autoref{f:classification-regression} presents an example of classification and regression problem. The former uses the information of two genes (input samples) to determine if the subject of study is healthy or suffers from a disease. The vertical line depicts the decision boundary of the classification model. The latter aims to estimate the number of years of life expectancy for a patient considering some given features\footnote{\url{https://towardsdatascience.com/coding-deep-learning-for-beginners-types-of-machine-learning-b9e651e1ed9d}}. 
 
 \begin{figure}[h]
 \centering
@@ -121,7 +122,7 @@ A linear model achieves a prediction by calculating a weighted sum of the inputs
 
 \subsubsection{Support Vector Machines}
 
-\ac{SVM} is one of the most powerful and used \ac{ML} technique which stands out for its performance in classification and regression tasks to solve not only linear but non-linear problems too. \ac{SVM} maps the data points from the original space to a higher dimension one. This algorithm looks for an hyperplane capable of achieving the classification or regression of the data in this new space, this dimensionality transformation is also known as the kernel trick\cite{Batta2020}.
+\ac{SVM} is one of the most powerful and used \ac{ML} techniques which stands out for its performance in classification and regression tasks to solve not only linear but non-linear problems too. \ac{SVM} maps the data points from the original space to a higher dimension one. This algorithm looks for a hyperplane capable of achieving the classification or regression of the data in this new space; this dimensionality transformation is also known as the kernel trick\cite{Batta2020}.
 
 \begin{figure}[h]
 \centering
@@ -130,9 +131,9 @@ A linear model achieves a prediction by calculating a weighted sum of the inputs
 \label{f:SVM-kernel-trick}
 \end{figure}
 
-\autoref{f:SVM-kernel-trick} exemplifies how this works where \begin{math}\phi\end{math} is the function that allows the transformation of the points to the higher dimension space \footnote{\url{https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f}}. It is noted that the hyperplane showed works as decision boundary for the classification task presented. \ac{SVM}s fit for complex but small or medium sized datasets \cite{geron2017}.
+\autoref{f:SVM-kernel-trick} exemplifies how this works where \begin{math}\phi\end{math} is the function that allows the transformation of the points to the higher dimension space \footnote{\url{https://towardsdatascience.com/the-kernel-trick-c98cdbcaeb3f}}. It is noted that the hyperplane showed works as a decision boundary for the classification task presented. \ac{SVM}s fit for complex but small or medium-sized datasets \cite{geron2017}.
  
-Finally, the problem is reduced to an optimization problem that aims to maximize the minimum distance between the sample points and the hyperplane found which can be observed in \autoref{f:SVM}. \autoref{eq:SVR} presents a equation for the regression version of the \ac{SVM} also called \ac{SVR} \cite{Ye2020}. 
+Finally, the problem is reduced to an optimization problem that aims to maximize the minimum distance between the sample points and the hyperplane found, which can be observed in \autoref{f:SVM}. \autoref{eq:SVR} presents a equation for the regression version of the \ac{SVM} also called \ac{SVR} \cite{Ye2020}. 
 
 \begin{figure}[h]
 \centering
@@ -152,8 +153,8 @@ Finally, the problem is reduced to an optimization problem that aims to maximize
     \item \begin{math}W_i\end{math} is the \begin{math}j^{th}\end{math} model parameter.
 \end{itemize}
 
-The are several kernels available but the most common ones present in the state-of-the-art are Gaussian Radial Based Function Kernel, Sigmoid Kernel and Polynomial Kernel \cite{Hussain2011}. \autoref{f:SVM-kernels} illustrate this 3 Kernel functions and their equations\footnote{\url{https://www.vebuso.com/2020/03/svm-hyperparameter-tuning-using-gridsearchcv/}}.
-\begin{math}\gamma and r \end{math} and d are adjustable kernel functions which are adjusted based on the data.
+There are several kernels available, but the most common ones present in the state-of-the-art are Gaussian Radial Based Function Kernel, Sigmoid Kernel and Polynomial Kernel \cite{Hussain2011}. \autoref{f:SVM-kernels} illustrate these 3 Kernel functions and their equations\footnote{\url{https://www.vebuso.com/2020/03/svm-hyperparameter-tuning-using-gridsearchcv/}}.
+\begin{math}\gamma \end{math}, r and d are adjustable kernel parameters that are adjusted based on the data.
 
 %\begin{equation}
 %    {\textrm{K}}({x_{i}},{x_{j}})=(\gamma {x_{i}}^{\textrm{T}}{x_{j}}+1)^{d}, \gamma >0
@@ -184,7 +185,7 @@ The are several kernels available but the most common ones present in the state-
 \section{Deep Learning}
 \label{s:Second-Background-Deep-Learning}
 
-\ac{DL} is a subcategory of the \ac{ML} which stands out for its versatility, higher performance, scalability, capacity to face complex and non-linear problems, and the ability of doing feature extraction by itself. \autoref{f:ML-vs-DL} illustrates the capability of \ac{DL} in comparison with \ac{ML}. 
+\ac{DL} is a subcategory of the \ac{ML} which stands out for its versatility, higher performance, scalability, capacity to face complex and non-linear problems, and the ability to do feature extraction by itself. \autoref{f:ML-vs-DL} illustrates the capability of \ac{DL} in comparison with \ac{ML}. 
 
 \begin{figure}[h]
 \centering
@@ -193,7 +194,7 @@ The are several kernels available but the most common ones present in the state-
 \label{f:ML-vs-DL}
 \end{figure}
 
-Lots of today's inventions are inspired in nature and environment phenomena. Well, the brain architecture has served as inspiration to \ac{ANN} which are the core of the \ac{DL}. An \ac{ANN} model is composed by a set of layers which contains a processing unit called perceptron that emulates a human neuron, \autoref{f:Perceptron} shows the perceptron unit and its analogy with a biological neuron. Neurons of each layer interconnect with others building a more complex structure with higher learning capabilities just as human brain neuronal connections. This artificial and mathematical connections between perceptrons are called weights. During the training process these weights update their values in order to minimize a loss function which measures the distance between the model output and the expected output, these updates are called learning \cite{Chollet2018}. 
+Lots of today's inventions are inspired by nature and environmental phenomena. Well, the brain architecture has served as an inspiration to \ac{ANN}s, which are the core of the \ac{DL}. An \ac{ANN} model is composed of a set of layers that contains a processing unit called perceptron that emulates a human neuron. \autoref{f:Perceptron} shows the perceptron unit and its analogy with a biological neuron. Neurons of each layer interconnect with others building a more complex structure with higher learning capabilities just as human brain neuronal connections. These artificial and mathematical connections between perceptrons are called weights. During the training process, these weights update their values in order to minimize a loss function that measures the distance between the model output and the expected output. These updates are called learning \cite{Chollet2018}. 
 
 \begin{figure}[h]
 \centering
@@ -202,7 +203,7 @@ Lots of today's inventions are inspired in nature and environment phenomena. Wel
 \label{f:Perceptron}
 \end{figure}
  
-An important feature of \ac{DL} is the potential to achieve high performance in complex problems with high amount of data. \autoref{f:ML-vs-DL-data-amount} shows the scalability and the potential performance based on the amount of data available to train the model\footnote{\url{https://www.deeplearning.ai/program/ai-for-everyone/}}.
+An important feature of \ac{DL} is the potential to achieve high performance in complex problems with a high amount of data. \autoref{f:ML-vs-DL-data-amount} shows the scalability and the potential performance based on the amount of data available to train the model\footnote{\url{https://www.deeplearning.ai/program/ai-for-everyone/}}.
 
 \begin{figure}[h!]
 \centering
@@ -223,8 +224,8 @@ Building a network made of perceptron results in an \ac{ANN} known as \ac{MLP}. 
 \end{figure}
 
 \subsubsection{Long Short term Memory Neural Network}
-In recent years, \ac{RNN} has demonstrated a high performance dealing with sequential data. This has led to a success implementation of these networks in \ac{NLP} field.
-Now a days, \ac{RNN}s mainly refers to \ac{GRU} and \ac{LSTM} networks which are modified versions of \ac{RNN} \cite{Guo2020}. \ac{LSTM} are specialized in long short-term problems building on its three gates (Input gate, Forget gate and Output gate). Therefore, LSTM is formulated in this research to model sequential characteristics of the \ac{WWT}. Detailed \ac{LSTM} cell model is shown in \autoref{f:LSTM-cell}.
+In recent years, \ac{RNN}s have demonstrated a high performance dealing with sequential data. It has led to a successful implementation of these networks in several fields such as \ac{NLP}.
+Nowadays, \ac{RNN}s mainly refers to \ac{GRU} and \ac{LSTM} networks which are modified versions of \ac{RNN} \cite{Guo2020}. \ac{LSTM} is specialized in long short-term problems building on its three gates (Input gate, Forget gate, and Output gate). Therefore, \ac{LSTM} is formulated in this research to model sequential characteristics of the \ac{WWT}. Detailed \ac{LSTM} cell model is shown in \autoref{f:LSTM-cell}.
 
 \begin{figure}[h]
 \centering
@@ -249,7 +250,7 @@ Now a days, \ac{RNN}s mainly refers to \ac{GRU} and \ac{LSTM} networks which are
 \label{sec:section_Example}
 
 \subsection{Mean Absolute Percentage Error}
-The \ac{MAPE} is a metric 
+The \ac{MAPE} is a metric commonly used to evaluate Time Series prediction error. The closer to zero, the better, being zero \% a perfect prediction. 
 \autoref{eq:MAPE} presents the formula to compute the value of \ac{MAPE}.
 
 \begin{equation}\label{eq:MAPE}
@@ -264,8 +265,8 @@ The \ac{MAPE} is a metric
 
 %\subsection{Determination Coefficient}
 
-\section{Summary}
-\label{s:Background-Summary}
+%\section{Summary}
+%\label{s:Background-Summary}
 
-The final section of each chapter should summarize the chapter. In comparison to the chapter.
+%The final section of each chapter should summarize the chapter. In comparison to the chapter.
 
