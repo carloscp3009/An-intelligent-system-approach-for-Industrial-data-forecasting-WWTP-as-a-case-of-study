@@ -4,12 +4,12 @@ This study proposes to predict one-day time-window \ac{COD}\textsubscript{D}, \a
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Biological-treatment-stage.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Biological-treatment-stage.pdf}
 \caption{Biological Treatment Stage}
 \label{f:Biological-treatment}
 \end{figure}
 
-\autoref{f:Biological-treatment} illustrates the composition of the biological treatment stage, which is the case of study in this research. This stage has three main components, and each one plays a vital role in the organic load removal, an equalization pit, a bioreactor, and a clarifier. Green circles represent measured variables of interest and potential input variables for the system. Orange circles are the target variables of this work, which are also available.
+\autoref{f:Biological-treatment} illustrates the composition of the biological treatment stage, which is the case of study in this research. This stage has three main components, and each one plays a vital role in the organic load removal; an equalization pit, a bioreactor, and a clarifier. Green circles represent measured variables of interest and potential input variables for the system. Orange circles are the target variables of this work, which are also available.
 
 This work uses Python programming language to implement the intelligent system, supported by several libraries such as Numpy, Pandas, Tensor Flow, Sci-kit Learn, and Matplotlib, among others. A GitHub repository contains the files corresponding to code, models, and some of the results presented in this document \footnote{\url{https://github.com/carloscp3009/Machine-Learning-Approaches-for-Industrial-data-forecasting}}. 
 
@@ -41,13 +41,13 @@ The following nomenclature determines the unit process or component within the b
 
 \section{Predictive model Approaches}
 \label{s:model-design}
-One of the first steps to build a data-driven system is to select which variables will feed the model. The correlation coefficient allows the selection of the exogenous variables used as inputs for the system. These selected variables enhance the model learning capability by reducing the noise of not correlated variables and decreasing the number of trainable parameters, which implies a model complexity reduction. 
+One of the first steps to build a data-driven system is to select which variables will feed the model. The correlation coefficient allows the selection of the exogenous variables used as inputs for the system. These selected variables enhance the model learning capability by reducing the noise of uncorrelated variables and decreasing the number of trainable parameters, which implies a model complexity reduction. 
 
 After variable selection, the dataset is split into training (0.8) and testing (0.2) sets. The first 80\% of the dataset serves as examples for the model to learn. The other 20 \% is used to evaluate the performance of the model using new data, obtaining certainty of its behaviour in production mode. 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/training-FlowChart.png}
+\includegraphics[width=\linewidth]{figures/Ch4/training-FlowChart.pdf}
 \caption{Training flow chart}
 \label{f:training-flowchart}
 \end{figure}
@@ -61,7 +61,7 @@ First, the target variable taken from the dataset is studied using a time-series
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Approach1.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Approach1.pdf}
 \caption{Approach 1}
 \label{f:Approach 1}
 \end{figure}
@@ -87,7 +87,7 @@ Time series decomposition is a time series analysis technique that allows splitt
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/time_series_descompose.png}
+\includegraphics[width=\linewidth]{figures/Ch4/time_series_descompose.pdf}
 \caption{Time Series Decomposition}
 \label{f:Time-series-decomposition}
 \end{figure}
@@ -102,14 +102,14 @@ After the time-series decomposition, both autocorrelation and partial autocorrel
 
     \begin{subfigure}{0.49\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/Ch4/Trend_autocorr.png}
+    \includegraphics[width=\linewidth]{figures/Ch4/Trend_autocorr.pdf}
     \caption{ACF}
     \label{f:auto}
     \end{subfigure}
 \hfill
     \begin{subfigure}{0.49\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figures/Ch4/Trend_Partial_autocorr.png}
+    \includegraphics[width=\linewidth]{figures/Ch4/Trend_Partial_autocorr.pdf}
     \caption{PACF}
     \label{f:partial}
     \end{subfigure}
@@ -125,7 +125,7 @@ The second approach uses a \ac{RNN}, specifically a \ac{LSTM}, a powerful networ
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Approach2.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Approach2.pdf}
 \caption{Approach 2}
 \label{f:Approach 2}
 \end{figure}
@@ -137,7 +137,7 @@ The third approach proposed uses a machine learning technique based on Support V
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Approach3.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Approach3.pdf}
 \caption{Approach 3}
 \label{f:Approach 3}
 \end{figure}
@@ -172,7 +172,7 @@ The first ensemble approach proposed is a simple averaging model obtained by cal
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach1.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach1.pdf}
 \caption{Average Ensemble approach}
 \label{f:Ensemble-approach1}
 \end{figure}
@@ -191,7 +191,7 @@ The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; t
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach2.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach2.pdf}
 \caption{MLP Ensemble approach}
 \label{f:Ensemble-approach2}
 \end{figure}
@@ -201,7 +201,7 @@ The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; t
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach3.png}
+\includegraphics[width=\linewidth]{figures/Ch4/Ensemble_Approach3.pdf}
 \caption{Selector Ensemble approach}
 \label{f:Ensemble-approach3}
 \end{figure}
