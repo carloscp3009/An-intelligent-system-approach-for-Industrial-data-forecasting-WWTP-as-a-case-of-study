@@ -29,7 +29,7 @@ It is necessary to standardize these variables to take them to similar level val
 \end{itemize}
 
 
-\section{Approach 1}
+\section{Approach 1 - Decomposition }
 \label{s:resutls-approach1}
 The first approach conducts the time series decomposition just as described in \autoref{ss:time-series-decomposition} for each target variable. It estimates the trend and seasonal components by applying auto-regression of its past values, a process supported in the auto-correlation study just as mentioned in \autoref{ss:autocorrelation}. The residual component is predicted by a \ac{FFNN} that receives the inputs presented in \autoref{s:results_data_selection} and includes the real residual value as an additional input feature. The \ac{FFNN} architecture and the approach prediction results are presented below.
 All model hyper-parameters were tuned by a grid search between the following options:
@@ -37,7 +37,7 @@ All model hyper-parameters were tuned by a grid search between the following opt
 \begin{itemize}
     \item Loss = [mse, mae]
     \item Optimizer = [SGD, adam]
-    \item Activation = [linear, tanh]
+    \item Activation = [linear, tanh, relu]
     \item Number of Layers = [1, 2]
     \item Number of Neurons per layer = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
     \item Batch Normalization = [0, 1]
@@ -126,7 +126,7 @@ All model hyper-parameters were tuned by a grid search between the following opt
 
 
 
-\section{Approach 2}
+\section{Approach 2 - LSTM}
 The \ac{LSTM} architecture for each target variable and the approach prediction results are presented below. The \ac{LSTM} network implemented takes until seven past days to predict one day ahead.
 All model hyper-parameters were tuned by a grid search within the following options:
 
@@ -135,7 +135,7 @@ All model hyper-parameters were tuned by a grid search within the following opti
     \item Optimizer = [SGD, adam]
     \item Activation = [Relu, linear, tanh]
     \item Number of Layers = [1, 2]
-    \item Number of Neurons per layer = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
+    \item Length of the output vector = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
     \item Batch Normalization = [0, 1]
     \item Dropout = [0, 1]
 \end{itemize}
@@ -164,7 +164,7 @@ For Batch normalization and Dropout, zero means they are not included in the net
     \item Optimizer = SGD
     \item Activation =  Tanh
     \item Number of Layers = 2
-    \item Number of Neurons per layer = [4, 32]
+    \item Length of the output vector = [4, 32]
     \item Batch Normalization = 0
     \item Dropout = 1
 \end{itemize}
@@ -177,7 +177,7 @@ For Batch normalization and Dropout, zero means they are not included in the net
     \item Optimizer = Adam
     \item Activation =  Tanh
     \item Number of Layers = 2
-    \item Number of Neurons per layer = [2, 18]
+    \item Length of the output vector = [2, 18]
     \item Batch Normalization = 1
     \item Dropout = 0
 \end{itemize}
@@ -218,22 +218,27 @@ For Batch normalization and Dropout, zero means they are not included in the net
     \item Optimizer = Adam
     \item Activation =  Linear
     \item Number of Layers = 2
-    \item Number of Neurons per layer = [4, 10]
+    \item Length of the output vector = [4, 10]
     \item Batch Normalization = 1
     \item Dropout = 0
 \end{itemize}
 
 %-----------------------------------------------
-\section{Approach 3}
+\section{Approach 3 - SVR}
+The \ac{SVR} approach uses a \ac{RBF} kernel. Model hyper-parameters were tuned by an empirical search within the following options:
 
+\begin{itemize}
+    \item Gamma = [0.0001 - 1]
+    \item Epsilon = [0.001 - 10]
+    \item C = [1 - 20]
+\end{itemize}
+%gamma of 0.001, epsilon equal to 0.2 and c value of 10.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch5/CODd-3.pdf}
 \caption{Approach 3 - COD\textsubscript{D}}
 \label{f:App3-codd}
 \end{figure}
-
-The last approach predicts using \ac{SVR} algorithm.
 
 \begin{figure}[h!]
 \centering
@@ -242,12 +247,15 @@ The last approach predicts using \ac{SVR} algorithm.
 \label{f:App3-codeq}
 \end{figure}
 
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch5/MLVSS-approach3.pdf}
 \caption{Approach 3 - MLVSS}
 \label{f:App3-MLVSS}
 \end{figure}
+
+
 
 This third model sometimes presents a shift prediction respect the expected value, nonetheless it achieves a good prediction. \autoref{f:App3-codd}, \autoref{f:App3-codeq}, and \autoref{f:App3-MLVSS} show the prediction results of this approach. 
 \clearpage
@@ -330,6 +338,22 @@ The last ensemble approach predicts which model will perform best based on the p
 \section{Discussion}
 \label{s:Contribution-2-Summary}
 
-This chapter presents the implementation and obtained results of three approaches to predict time series variables of the wastewater treatment process. Also, three different ensemble approaches are presented to enhance the intelligent system prediction performance.
-\autoref{t:Results} summarizes the \ac{MAPE} results obtained by the single models and the ensemble approaches. It is worth mentioning that hyper-parameters tuning was made using the training set as well as the evaluation of ensemble model enhancement. The best model performance over the training is highlighted in bold. The ensemble models offer a more robust prediction and present some improvements in \ac{MAPE}\%.
-\input{tables/MAPEs}
+This chapter presents the implementation and obtained results of three approaches predicting time series variables of the wastewater treatment process. Also, three different ensemble approaches are presented to enhance the intelligent system prediction performance.
+\autoref{t:ResultsTrain} summarizes the \ac{MAPE} results achieved by the single models and the ensemble approaches during the training phase. It is worth mentioning that hyper-parameters tuning was made using this dataset. 
+\input{tables/MapeTrain} 
+
+\autoref{t:ResultsTest} shows the results over the testing dataset. It can be noted that the two best models are the Decomposition Approach and the Selection Ensemble. Because of the close similarity between their results, hypothesis testing is conducted to determine if there is a statistically meaningful difference in the models' performances. The null hypothesis is that the Mean of the \ac{MAPE} metric is equal for the Decomposition approach and Selection Ensemble. The alternative hypothesis dictates that there is evidence that both metrics are different.
+\input{tables/MapeTest}
+
+\newpage
+\begin{align*}
+H_{0}  & :\mu_{MAPE_{Decomposition App.}}=\mu_{MAPE_{Selection Ens.}}\\
+H_{1}  & :\mu_{MAPE_{Decomposition App.}}\neq\mu_{MAPE_{Selection Ens.}}\\
+\end{align*}
+
+\autoref{t:Ttest} presents the T-statistic and the p-Value obtained from the testing. Setting a confidence interval of 95\% (\begin{math}\alpha = 0.05\end{math}) the p-Values of the testing dataset lead to not reject the null hypothesis. It is not possible to affirm that one model is better than the other in terms of \ac{MAPE} because they are not statistically different.
+%The ensemble models offer a more robust prediction and present some improvements in \ac{MAPE}\%.
+\input{tables/T-test}
+%\input{tables/MAPEs} 
+
+The Decomposition Approach and the Selection Ensemble present an equal performance. It is worth mentioning that the Decomposition Approach is much simpler than the Selection Ensemble, which is a bright spot for the first one. Despite that simplicity, the ensemble approach presents a compelling potential. The ensemble models tend to be more robust because their prediction depends on multiple models, not a single one. Different works in the literature support this statement \cite{Nourani2018, Nourani2021, Lu2020}.

@@ -1,0 +1,202 @@
+%% This document created by Scientific Word (R) Version 3.0
+
+\documentclass{book}%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.00.0.2606}
+%TCIDATA{CSTFile=LaTeX Book.cst}
+%TCIDATA{Created=Thu Oct 17 23:10:40 2002}
+%TCIDATA{LastRevised=Friday, June 03, 2005 10:57:02}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Books\Standard LaTeX Book">}
+\newcommand\titulo[2]{\textcolor{#1}{\underline{#2}}}
+\newcommand\capitulo[2]{\begin{center}
+\colorbox{azulc}{\textcolor{white}{\large CAPÍTULO #1}}  {\large
+\textcolor{azulc}{#2}}
+\end{center}}
+\newcommand\apleccion[3]{
+\begin{center}
+\docLink{#1}{\includegraphics{../../../../images/interfaz/left.gif}}\ \ \docLink{#2}{\includegraphics{../../../../images/interfaz/right.gif}}\ \ \docLink[_top]{#3}{\includegraphics{../../../../images/interfaz/inicio.gif}}
+\end{center}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+
+\begin{quotation}
+%Ojaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+%inicio encabezado
+{\color{gray}
+\begin{tabular}
+[c]{@{\extracolsep{\fill}}lcr}%
+\docLink{../../leccion6/anova.tex}{\includegraphics{../../../../images/navegacion/anterior.gif}}
+\begin{tabular}
+[c]{l}%
+{\color {darkgray} {\small Analisis de varianza}}\\
+\\
+\\
+\end{tabular}
+&
+\docLink[_top]{../../../../index.html}{\includegraphics{../../../../images/navegacion/inicio.gif}}
+\docLink{../../../../docs_curso/contenido.html}{\includegraphics{../../../../images/navegacion/contenido.gif}}
+\docLink{../../../../docs_curso/descripcion.html}{\includegraphics{../../../../images/navegacion/descripcion.gif}}
+\docLink[_top]{../../../../docs_curso/profesor.html}{\includegraphics{../../../../images/navegacion/profesor.gif}} &
+\begin{tabular}
+[c]{r}%
+{\color {darkgray} {\small Prueba de significancia para cada coeficiente de regresion}}%
+\\
+\\
+\\
+\end{tabular}
+\docLink{../leccion7-2/hipo-ind-beta.tex}{\includegraphics{../../../../images/navegacion/siguiente.gif}}\\
+&  &
+\end{tabular}
+}
+%fin encabezado
+%Ojaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+\end{quotation}
+
+\begin{center}
+\includegraphics{../../../../images/line_col.gif} \bigskip
+\textcolor{green}{\textbf{Prueba de significancia de la
+regresión}} \bigskip\includegraphics{../../../../images/line_col.gif}
+\end{center}
+
+\begin{quotation}
+La prueba de significancia de la regresi\'{o}n es una de la pruebas de
+hip\'{o}tesis utilizadas para medir la bondad de ajuste del modelo. \ Esta
+prueba determina si existe una relaci\'{o}n lineal entre la variable respuesta
+$Y$ y alguna de las variables regresoras $X_{1},X_{2},\ldots,X_{n} $. \ La
+hip\'{o}tesis estad\'{\i}stica adecuada es
+
+\bigskip%
+
+\begin{align*}
+H_{0}  & :\beta_{1}=\beta_{1}=\cdots=\beta_{k}=0\\
+H_{0}  & :\beta_{j}\neq0 \ \text{ para al menos un }j;\text{ \ }j=1,2,\ldots,k
+\end{align*}
+
+
+\bigskip
+
+Al rechazar la hip\'{o}tesis nula se concluye que al menos una de las
+variables regresoras contribuye significativamente al modelo.
+
+\bigskip
+
+La prueba estad\'{\i}stica utilizada es
+
+\bigskip%
+
+\begin{align*}
+F  & =\dfrac{CM_{\text{Regresi\'{o}n}}}{CM_{\text{Error}}}\\
+& =\dfrac{SC\left(  \text{Regresi\'{o}n}/b_{0}\right)  /\left(  p-\right)
+1}{CM_{\text{Error}}}\\
+& =\dfrac{\left(  \mathbf{b}^{\prime}\mathbf{X}^{\prime}\mathbf{Y-}%
+n\overline{Y}^{2}\right)  /\left(  p-1\right)  }{CM_{\text{Error}}}%
+\end{align*}
+
+
+\bigskip
+
+La cual asumiendo que la hip\'{o}tesis nula es cierta se distribuye $\ F$ con
+$k$ grados de libertad en el numerador y $n-k-1$ grados de libertad en el denominador.
+
+\bigskip
+
+Se rechaza la hip\'{o}tesis nula si el valor calculado de la estad\'{\i}stica
+de prueba es mayor que el valor te\'{o}rico de la distribuci\'{o}n $F\left(
+\alpha,k,n-k-1\right)  $.
+
+\bigskip\colorbox{green}{\textcolor{white}{ Ejemplo}} \bigskip
+
+La hip\'{o}tesis es dada por%
+
+\begin{align*}
+H_{0}  & :\beta_{1}=\beta_{2}=0\\
+H_{0}  & :\beta_{j}\neq0\text{ para al menos un }j\text{ \ }j=1,2
+\end{align*}
+
+
+La prueba estad\'{\i}stica utilizada es
+
+\bigskip%
+
+\begin{align*}
+F  & =\dfrac{SC\left(  \text{Regresi\'{o}n}/b_{0}\right)  /\left(  p-1\right)
+}{SC\left(  \text{Residual}\right)  /\left(  n-p\right)  }\\
+& =\dfrac{2618,98/\left(  3-1\right)  }{43,1606/\left(  8-3\right)  }\\
+& =151,70
+\end{align*}
+
+
+Luego como el valor P=0,00 entonces se rechaza la hip\'{o}tesis nula lo cual
+significa que al menos una de las variables regresoras $X_{1}$ o $X_{2}$
+contribuye significativamente al modelo.
+
+%Ojoooooooooooooooooooooooooooooooo
+\newline
+
+{\color{gray}
+\begin{tabular}
+[c]{@{\extracolsep{\fill}}lcr}
+&  & \\
+\docLink{../../leccion6/anova.tex}{\includegraphics{../../../../images/navegacion/anterior.gif}}
+\begin{tabular}
+[c]{l}%
+{\color {darkgray} {\small Analisis de varianza}}\\
+\\
+\\
+\end{tabular}
+&
+\docLink[_top]{../../../../index.html}{\includegraphics{../../../../images/navegacion/inicio.gif}}
+\docLink{../../../../docs_curso/contenido.html}{\includegraphics{../../../../images/navegacion/contenido.gif}}
+\docLink{../../../../docs_curso/descripcion.html}{\includegraphics{../../../../images/navegacion/descripcion.gif}}
+\docLink[_top]{../../../../docs_curso/profesor.html}{\includegraphics{../../../../images/navegacion/profesor.gif}} &
+\begin{tabular}
+[c]{r}%
+{\color {darkgray} {\small Prueba de significancia para cada coeficiente de regresion}}%
+\\
+\\
+\\
+\end{tabular}
+\docLink{../leccion7-2/hipo-ind-beta.tex}{\includegraphics{../../../../images/navegacion/siguiente.gif}}
+\end{tabular}
+}
+\end{quotation}
+
+\begin{flushright}
+\docLink[_blank]{http://www.unal.edu.co}{\includegraphics{../../../../images/interfaz/copyright.gif}}%
+
+\end{flushright}
+
+
+
+
+\end{document}

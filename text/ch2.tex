@@ -249,8 +249,10 @@ Nowadays, \ac{RNN}s mainly refers to \ac{GRU} and \ac{LSTM} networks which are m
 \section{Evaluation Metrics}
 \label{sec:section_Example}
 
+There are different performance measure for regression problems among which \ac{RMSE}, Coefficient of Determination (\begin{math}R^2\end{math}), and \ac{MAPE} are the most used in the literature. This work uses the \ac{MAPE} as the evaluation metric. This Metric is commonly used to evaluate Time Series prediction errors and allows the comparison with other literature works since they present it.
+
 \subsection{Mean Absolute Percentage Error}
-The \ac{MAPE} is a metric commonly used to evaluate Time Series prediction error. The closer to zero, the better, being zero \% a perfect prediction. 
+The \ac{MAPE} is an error metric. The closer to zero, the better, being zero \% a perfect prediction. 
 \autoref{eq:MAPE} presents the formula to compute the value of \ac{MAPE}.
 
 \begin{equation}\label{eq:MAPE}

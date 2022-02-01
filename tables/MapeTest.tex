@@ -1,0 +1,32 @@
+%\begin{longtable}{@{}l *{2}{rr}}
+\begin{longtable}[h]{@{}l *{6}{rr}}
+\caption[Testing results]{Testing results}
+\label{t:ResultsTest}
+\\
+%   
+\toprule%
+
+
+ {\bfseries Testing} & {\bfseries Decomposition} & {\bfseries LSTM} & {\bfseries SVR} & {\bfseries Average} & {\bfseries Fusion} & {\bfseries Selection}
+\\
+
+\cmidrule[0.4pt](r{0.125em}){1-1}%
+\cmidrule[0.4pt](lr{0.125em}){2-7}%
+
+
+
+  \endfirsthead
+
+\endhead
+
+
+        MAPE(\%) & Approach & Approach  & Approach  & Ensemble  & Ensemble  & Ensemble   \\ 
+        \hline
+        MVLSS  & 9.2  & 19.0 & 31.8  & 17.8  & 14.8  & 11.3  \\ 
+        COD\textsubscript{EQ}  & 6.21  & 7.59  & 5.67  & 5.68  & 6.37  & 6.94  \\ 
+        COD\textsubscript{D} & 13.7  & 26.5  & 15.5  & 17.9  & 18.9  & 15.3  \\ 
+
+
+\bottomrule
+
+\end{longtable}

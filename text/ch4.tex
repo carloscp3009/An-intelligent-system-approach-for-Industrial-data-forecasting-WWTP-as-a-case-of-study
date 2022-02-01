@@ -1,13 +1,6 @@
-\ac{COD} is one of the most essential variables in the process of a biological treatment since experts can make decisions based on the measurements of this variable. The objective of biological wastewater treatment is to remove the pollutants present in water. Thus, this treatment is used overall because it is compelling and more efficient than numerous mechanical or compound procedures. In the bioreactor at this stage, a variety of microorganisms are used to break down organic matter in the water. However, these microorganisms are susceptible to change, depending on several bioreactor conditions. Likewise, it turns out relevant monitoring the concentration of biomass available in the bioreactor, which indicates the state of the population of the microorganisms.
+\ac{COD} is an essential variable in the biological treatment process since experts can make decisions based on the measurements of this variable. The objective of biological wastewater treatment is to remove the pollutants present in water. Thus, this treatment is used overall because it is compelling and more efficient than numerous mechanical or compound procedures. In the bioreactor at this stage, a variety of microorganisms are used to break down organic matter in the water. However, these microorganisms are susceptible to change, depending on several bioreactor conditions. Likewise, it turns out relevant monitoring the concentration of biomass available in the bioreactor, which indicates the state of the population of the microorganisms.
 
 This study proposes to predict one-day time-window \ac{COD}\textsubscript{D}, \ac{COD}\textsubscript{EQ}, and \ac{MLVSS}, essential parameters in decision-making. Knowing how contaminated the water will be at the effluent stream (discharge point), the organic matter concentration at the input of the bioreactor, and how the microorganism population in charge of the biological stage is going to behave. 
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/Ch4/Biological-treatment-stage.pdf}
-\caption{Biological Treatment Stage}
-\label{f:Biological-treatment}
-\end{figure}
 
 \autoref{f:Biological-treatment} illustrates the composition of the biological treatment stage, which is the case of study in this research. This stage has three main components, and each one plays a vital role in the organic load removal; an equalization pit, a bioreactor, and a clarifier. Green circles represent measured variables of interest and potential input variables for the system. Orange circles are the target variables of this work, which are also available.
 
@@ -24,7 +17,7 @@ The study utilizes 343 data samples from a wastewater treatment facility located
  \item	Nitrogen (N)
  \item	pH
  \item	Mixed liquor dissolved oxygen (DO)
- \item	Food to microorganism (F/M)
+ \item	Level indicator (LIT)
 \end{itemize}
 
 The following nomenclature determines the unit process or component within the biological stage that the variable is measured.
@@ -39,11 +32,18 @@ The following nomenclature determines the unit process or component within the b
  \item	D = Discharge Pit
 \end{itemize}
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/Ch4/Biological-treatment-stage.pdf}
+\caption{Biological Treatment Stage}
+\label{f:Biological-treatment}
+\end{figure}
+
 \section{Predictive model Approaches}
 \label{s:model-design}
-One of the first steps to build a data-driven system is to select which variables will feed the model. The correlation coefficient allows the selection of the exogenous variables used as inputs for the system. These selected variables enhance the model learning capability by reducing the noise of uncorrelated variables and decreasing the number of trainable parameters, which implies a model complexity reduction. 
+One of the first steps to build a data-driven system is to select which variables will feed the model for which there are different methods. This work uses a Pearson correlation study to determine the model input variables since it is the most used technique found in the literature review. The correlation coefficient is a value that indicates the relationship between variables. It allows the selection of the exogenous variables used as inputs for the system. These selected variables enhance the model learning capability by reducing the noise of uncorrelated variables and decreasing the number of trainable parameters, which implies a model complexity reduction.
 
-After variable selection, the dataset is split into training (0.8) and testing (0.2) sets. The first 80\% of the dataset serves as examples for the model to learn. The other 20 \% is used to evaluate the performance of the model using new data, obtaining certainty of its behaviour in production mode. 
+After variable selection, the dataset is split into training (0.8) and testing (0.2) sets. The first 80\% of the dataset serves as examples for the model to learn. The other 20 \% is used to evaluate the model's performance using new data, obtaining certainty of its behavior in production mode. \autoref{f:training-flowchart} shows this process.
 
 \begin{figure}[h]
 \centering
@@ -52,17 +52,18 @@ After variable selection, the dataset is split into training (0.8) and testing (
 \label{f:training-flowchart}
 \end{figure}
 
-Once a technique is selected, the training of the model begins. An error measurement is necessary to support the performance of the model. Therefore, the \ac{MAPE} is used as the evaluation metric for this study defined as shown in \autoref{eq:MAPE}.
+There are several computational techniques used in \ac{WWTP} predictions as shown in \autoref{f:techniques-prediction}. This work implements diverse models and keeps a set of the best three based on their performance, each with a different structure and goodness. Once a technique is selected, the training of the model begins. An error measurement is necessary to support the performance of the model. Therefore, this study selects the \ac{MAPE} as the evaluation metric, which is defined in \autoref{eq:MAPE}.
 
-\subsection{Approach 1}
+\subsection{Approach 1 - Decomposition Approach}
 \label{s:Approach1}
 
-First, the target variable taken from the dataset is studied using a time-series decomposition technique that transforms and decomposes the variable into three additive components: trend, seasonality and residual. Leveraging an autocorrelation study, the first two components are estimated using their past values. On the other hand, the residual component is assessed using an \ac{FFNN}, which received exogenous variables selected from a correlation study and a past value of the same component. Finally, the addition of the three components provides the \ac{COD} prediction. \autoref{f:Approach 1} shows in more detail how the model is conceived and how forecasting is achieved.
+First, the target variable taken from the dataset is studied using a time-series decomposition technique that transforms and decomposes the variable into three additive components: trend, seasonality and residual. Leveraging an autocorrelation study, the first two components are estimated using their past values. On the other hand, the residual component is assessed using an \ac{FFNN}, which received exogenous variables selected from a correlation study and the real past value of the same component. Finally, the addition of the three components provides the \ac{COD} prediction. \autoref{f:Approach 1} shows in more detail how the model is conceived and how it achieves the forecasting.
+
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch4/Approach1.pdf}
-\caption{Approach 1}
+\caption{Approach 1 - Decomposition Approach}
 \label{f:Approach 1}
 \end{figure}
 
@@ -118,27 +119,28 @@ After the time-series decomposition, both autocorrelation and partial autocorrel
 \label{f:autocorrelation}
 \end{figure}
 
-\subsection{Approach 2}
+\subsection{Approach 2 - LSTM Approach}
 \label{s:Approach2}
 
-The second approach uses a \ac{RNN}, specifically a \ac{LSTM}, a powerful network architecture for sequential data which considers the effect of past values of both endogenous and exogenous variables by itself and learns possible time patterns during the training. \autoref{f:Approach 2} shows a general overview of the second approach. This network requires some data pre-processing to structure the data in sequences format (seven past steps are considered for this study).
+The second approach uses a \ac{RNN}, specifically a \ac{LSTM}, a powerful network architecture for sequential data which considers the effect of past values of both endogenous and exogenous variables by itself and learns possible time patterns during the training. \autoref{f:Approach 2} shows a general overview of the second approach. This network requires some data pre-processing to structure the data in sequences format (this approach considers seven past steps).
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch4/Approach2.pdf}
-\caption{Approach 2}
+\caption{Approach 2 - LSTM Approach}
 \label{f:Approach 2}
 \end{figure}
 
-\subsection{Approach 3}
+\subsection{Approach 3 - SVR Approach}
 \label{s:Approach3}
 
-The third approach proposed uses a machine learning technique based on Support Vector Machines. The \ac{SVR} algorithm offers an accurate prediction of the time series. This model receives as inputs the exogenous variables selected from the correlation analysis. The implemented model uses \ac{RBF} kernel, gamma of 0.001, epsilon equal to 0.2 and c value of 10.
+\autoref{f:Approach 3} presents an overview of this approach. The third approach proposed uses a machine learning technique based on Support Vector Machines. The \ac{SVR} algorithm offers an accurate prediction of the time series. The approach receives as inputs the exogenous variables selected from the correlation analysis. The implemented model uses \ac{RBF} kernel and requires the tuning of these hyper-parameters; gamma, epsilon, and c value. 
+%gamma of 0.001, epsilon equal to 0.2 and c value of 10.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/Ch4/Approach3.pdf}
-\caption{Approach 3}
+\caption{Approach 3 - SVR Approach}
 \label{f:Approach 3}
 \end{figure}
 
@@ -156,7 +158,7 @@ Three different ensemble strategies are implemented and compared in this study. 
 \label{f:Ensemble-approach}
 \end{figure}
 
-\subsection{Ensemble Approach 1}
+\subsection{Ensemble Approach 1 - Average}
 \label{s:Ensemble-Approach1}
 The first ensemble approach proposed is a simple averaging model obtained by calculating the mean of the single models' outputs. \autoref{eq:avg-ensemble} present the combination used in this approach. Since this average ensemble approach is one of the simplest combinations, it is considered the enhanced models' baseline. \autoref{f:Ensemble-approach1} illustrate how this ensemble works.
 
@@ -177,9 +179,14 @@ The first ensemble approach proposed is a simple averaging model obtained by cal
 \label{f:Ensemble-approach1}
 \end{figure}
 
-\subsection{Ensemble Approach 2}
+\subsection{Ensemble Approach 2 - MLP Fusion}
 \label{s:Ensemble-Approach2}
-The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; the single model outputs together with the same exogenous variables used to predict that target variable. The concept is that the \ac{ANN} finds a more complex but more accurate combination of the predicted results but also enhances the final prediction even more by using the exogenous variables. \autoref{f:Ensemble-approach2} shows how this ensemble approach is conceived. 
+The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; the single model outputs together with the same exogenous variables used to predict that target variable. 
+The idea behind this ensemble approach was born with the intention of implementing a Kalman Filter. This algorithm (which is very used in sensor fusion) receives different measurements and estimates the variable with more accuracy and robustness. 
+Then, the idea of replacing the Kalman Filter with an \ac{MLP} arose. The concept is that the \ac{ANN} can find a more complex but more accurate combination of the predicted results.
+Similar to \cite{Nourani2018}, an \ac{MLP} makes a nonlinear fusion of the single model outputs, with the difference that this approach includes the exogenous variables, which enhances the final prediction even more. 
+
+\autoref{f:Ensemble-approach2} shows how this ensemble approach is conceived. 
 
 \begin{itemize}
     \item \begin{math}\hat{Y}\end{math} is the ensemble model prediction.
@@ -196,7 +203,7 @@ The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; t
 \label{f:Ensemble-approach2}
 \end{figure}
 
-\subsection{Ensemble Approach 3}
+\subsection{Ensemble Approach 3 - Selection}
 \label{s:Ensemble-Approach3}
 
 \begin{figure}[h]
@@ -206,8 +213,10 @@ The second ensemble approach proposed uses a \ac{MLP} that receives as inputs; t
 \label{f:Ensemble-approach3}
 \end{figure}
 
-The idea behind the last ensemble approach proposed is that each model performs better depending on the situation or the process conditions. An \ac{MLP} receives the exogenous variables which intend to represent or provide the information concerning the process state or conditions. The \ac{MLP} aims to estimate which model behaves the best in each time step. The absolute error between the expected output and the models' prediction is used to define which model performs the best at each sample and build a new dataset with the corresponding labels to train this classifier. 
-The classifier prediction output is used to select the most suitable model to predict the target variable at the current time step. \autoref{f:Ensemble-approach3} shows how the Selection ensemble approach works.
+The motivation for the third ensemble approach proposed is that each model has become an expert predictor under certain situations. It is possible to analyze the system conditions and discern which expert should predict each iteration. 
+
+Each model performs better depending on the situation or the process conditions. An \ac{MLP} receives the exogenous variables which intend to represent or provide the information concerning the process state or conditions. The \ac{MLP} aims to estimate which model behaves the best in each time step. The absolute error between the expected output and the model's prediction is used to define which model performs the best at each sample and build a new temporal dataset with the corresponding labels to train this classifier. 
+The classifier prediction output selects the most suitable model to predict the target variable at the current time step. \autoref{f:Ensemble-approach3} shows how the Selection ensemble approach works.
 
 \section{Summary}
 
